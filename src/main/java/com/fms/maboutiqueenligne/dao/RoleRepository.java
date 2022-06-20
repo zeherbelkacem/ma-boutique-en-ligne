@@ -2,13 +2,13 @@ package com.fms.maboutiqueenligne.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.fms.maboutiqueenligne.entities.User;
+import com.fms.maboutiqueenligne.entities.Role;
 
 /**
- * User Repository
+ * Role Repository
  * @author Delmerie JOHN ROSE
  *
  */
-public interface UserRepository extends JpaRepository<User, Long> {
-	
+public interface RoleRepository extends JpaRepository<Role, Long> {
+
 }

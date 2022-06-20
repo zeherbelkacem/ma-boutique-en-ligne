@@ -6,9 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,11 +19,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 /**
- * User Entity
+ * Role Entity
+ * 
  * @author Delmerie JOHN ROSE
  *
  */
-public class User implements Serializable {
+public class Role implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,11 +33,6 @@ public class User implements Serializable {
 	private long id;
 
 	@NotNull
-	@Email
-	private String email;
-
-	@NotNull
-	@Size(min = 8, max = 16)
-	private String password;
+	private String name;
 
 }

@@ -1,10 +1,10 @@
 package com.fms.maboutiqueenligne.controllers;
 
 /**
- * User Controller
+ * Order Controller
  * @author Delmerie JOHN ROSE
  *
  */
-public class UserController {
+public class OrderController {
 
 }

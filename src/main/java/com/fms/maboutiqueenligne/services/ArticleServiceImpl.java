@@ -16,7 +16,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	ArticleRepository articleRepository;
-	HashMap<Integer, Article> cart = new HashMap<Integer, Article>();
+	HashMap<Long, Article> cart = new HashMap<Long, Article>();
 
 	@Override
 	public List<Article> getAll() throws Exception {
@@ -24,12 +24,12 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public List<Article> getAllByCategoryId(long catId) throws Exception {
-		return articleRepository.findAllByCategoryId(catId);
+	public Page<Article> getAllByCategoryId(long catId, Pageable pageable) {
+		return articleRepository.findByCategoryId(catId, pageable);
 	}
 
 	@Override
-	public Article getOneById(long id) throws Exception {
+	public Article getOneById(long id) {
 		return articleRepository.findById(id).get();
 	}
 
@@ -44,21 +44,45 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public void addToCart(Article article) throws Exception {
-		// TODO Auto-generated method stub
+	public void addToCart(Long id) {
+		Article article = getOneById(id);
+		if (article != null) {
+			if (cart.containsKey(id)) {
+				int qty = getCart().get(id).getQuantity() + 1;
+				article.setQuantity(qty);
+				cart.put(id, article);
+			} else {
+				article.setQuantity(1);
+				cart.put(article.getId(), article);
+			}
+		}
+	}
 
+	public double getTotalCart() {
+		double total = 0;
+		for (Article article : cart.values()) {
+			total += article.getPrice() * article.getQuantity();
+		}
+		return total;
 	}
 
 	@Override
-	public boolean removeFromCart(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public void removeFromCart(long id) {
+		if (cart.get(id).getQuantity() > 1) {
+			cart.get(id).setQuantity(cart.get(id).getQuantity() - 1);
+		} else {
+			cart.remove(id);
+		}
 	}
 
 	@Override
-	public List<Article> getCart() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public HashMap<Long, Article> getCart() {
+		return cart;
+	}
+
+	@Override
+	public Page<Article> getAllBySearch(String search, Pageable pageable) {
+		return articleRepository.findByDescriptionContainsOrBrandContains(search, search, pageable);
 	}
 
 }

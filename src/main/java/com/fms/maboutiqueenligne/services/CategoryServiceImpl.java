@@ -15,12 +15,12 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryRepository categoryRepository;
 
 	@Override
-	public List<Category> getAll() throws Exception {
+	public List<Category> getAll()  {
 		return categoryRepository.findAll();
 	}
 
 	@Override
-	public Category getOneById(long id) throws Exception {
+	public Category getOneById(long id) {
 		return categoryRepository.findById(id).get();
 	}
 

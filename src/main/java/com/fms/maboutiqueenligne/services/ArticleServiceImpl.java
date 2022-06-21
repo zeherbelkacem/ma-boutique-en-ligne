@@ -40,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public Page<Article> getAllByPages(Pageable pageable) throws Exception {
-		return articleRepository.findAllByPages(pageable);
+		return articleRepository.findAll(pageable);
 	}
 
 	@Override

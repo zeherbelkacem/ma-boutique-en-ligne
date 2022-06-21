@@ -21,20 +21,17 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category getOneById(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findById(id).get();
 	}
 
 	@Override
 	public Category save(Category category) {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.save(category);
 	}
 
 	@Override
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-
+		categoryRepository.deleteById(id);
 	}
 
 }

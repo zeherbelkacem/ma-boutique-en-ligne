@@ -17,7 +17,7 @@ public interface CategoryService {
 	 * @param id
 	 * @return une catégorie
 	 */
-	public Category getOneById (long id) throws Exception;
+	public Category getOneById (long id);
 	
 	/**
 	 * Fonction qui sauvegarde et permet de mattre à jour une catégorie

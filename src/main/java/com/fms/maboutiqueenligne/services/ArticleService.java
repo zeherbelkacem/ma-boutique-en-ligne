@@ -1,5 +1,6 @@
 package com.fms.maboutiqueenligne.services;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -18,11 +19,11 @@ public interface ArticleService {
 
 	/**
 	 * Fonction qui récupère les articles classés par catégorie
-	 * 
 	 * @param catId
-	 * @return liste d'articles
+	 * @param pageable
+	 * @return
 	 */
-	public List<Article> getAllByCategoryId(long catId) throws Exception;
+	public Page<Article> getAllByCategoryId(long catId, Pageable pageable);
 
 	/**
 	 * Fonction qui retourne un article selon son identifiant
@@ -49,20 +50,17 @@ public interface ArticleService {
 	public Page<Article> getAllByPages(Pageable pageable) throws Exception;
 
 	/**
-	 * Fonction qui permet d'ajouter un article au panier
-	 * 
-	 * @param article
+	 *  Fonction qui permet d'ajouter un article au panier
+	 * @param id
 	 */
-	public void addToCart(Article article) throws Exception;
+	public void addToCart(Long id) ;
 
 	/**
 	 * Fonction qui permet de retirer un article du panier en fonction de
 	 * l'identifiant
-	 * 
 	 * @param id
-	 * @return true si retiré
 	 */
-	public boolean removeFromCart(long id) throws Exception;
+	public void removeFromCart(long id);
 
 	/**
 	 * Fonction qui retourne le panier d'article
@@ -70,6 +68,12 @@ public interface ArticleService {
 	 * @return le panier d'articles sous forme de liste
 	 * @throws Exception
 	 */
-	public List<Article> getCart() throws Exception;
+	public HashMap<Long, Article> getCart() ;
+	
+	/**
+	 * Fonction qui retourne la liste des articles par recherche
+	 * @return
+	 */
+	public Page<Article> getAllBySearch(String search, Pageable pageable);
 
 }

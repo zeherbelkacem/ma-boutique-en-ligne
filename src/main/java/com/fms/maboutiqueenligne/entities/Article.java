@@ -14,7 +14,6 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * Classe Article
@@ -27,7 +26,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Article implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -51,4 +49,12 @@ public class Article implements Serializable {
 	@ManyToOne
 	@NotNull
 	private Category category;
+
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", brand=" + brand + ", description=" + description + ", price=" + price
+				+ ", quantity=" + quantity + ", category=" + category + "]";
+	}
+	
+	
 }

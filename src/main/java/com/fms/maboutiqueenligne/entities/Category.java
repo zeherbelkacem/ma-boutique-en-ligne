@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * Classe Category
@@ -26,7 +25,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -39,4 +37,11 @@ public class Category implements Serializable {
 
 	@OneToMany(mappedBy = "category")
 	private Collection<Article> articles;
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", articles=" + articles + "]";
+	}
+	
+	
 }

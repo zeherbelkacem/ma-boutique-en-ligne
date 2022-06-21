@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	private long userId = 0;
 
 	@Override
 	public List<User> getAll() throws Exception {
@@ -43,6 +44,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void delete(long id) throws Exception {
 		userRepository.deleteById(id);
+	}
+	
+	@Override
+	public User findUserByEmailAndPassword(String email, String password) {
+		User user = userRepository.findByEmailAndPassword(email, password);
+		if(user != null) userId  = user.getUserId();
+		return user;
+	}
+	
+	@Override
+	public long getUserId() {
+		return userId;
 	}
 
 }

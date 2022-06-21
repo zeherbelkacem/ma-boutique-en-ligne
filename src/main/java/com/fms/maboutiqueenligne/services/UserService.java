@@ -47,4 +47,7 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	void delete(long id) throws Exception;
+	public User findUserByEmailAndPassword(String email, String password);
+
+	long getUserId();
 }

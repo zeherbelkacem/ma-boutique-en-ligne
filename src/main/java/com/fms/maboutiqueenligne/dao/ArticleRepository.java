@@ -1,6 +1,5 @@
 package com.fms.maboutiqueenligne.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -13,11 +12,7 @@ import com.fms.maboutiqueenligne.entities.Article;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-	
-	public List <Article> findAllByCategoryId(long catId);
-	
-	
-	public Page<Article> findAllByPages (Pageable pageable);
-	
-	
+	public List<Article> findAllByCategoryId(long catId);
+
+	public Page<Article> findAllByPages(Pageable pageable);
 }

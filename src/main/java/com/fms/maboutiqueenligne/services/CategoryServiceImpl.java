@@ -1,19 +1,19 @@
 package com.fms.maboutiqueenligne.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fms.maboutiqueenligne.dao.CategoryRepository;
 import com.fms.maboutiqueenligne.entities.Category;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
-	
+public class CategoryServiceImpl implements CategoryService {
+
+	@Autowired
 	CategoryRepository categoryRepository;
-	
-	
+
 	@Override
 	public List<Category> getAll() throws Exception {
 		return categoryRepository.findAll();
@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public void delete(long id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

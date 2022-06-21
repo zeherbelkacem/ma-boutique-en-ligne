@@ -1,6 +1,5 @@
 package com.fms.maboutiqueenligne.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,8 +16,8 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Autowired
 	ArticleRepository articleRepository;
-	HashMap <Integer, Article> cart= new HashMap<Integer, Article>();
-	
+	HashMap<Integer, Article> cart = new HashMap<Integer, Article>();
+
 	@Override
 	public List<Article> getAll() throws Exception {
 		return articleRepository.findAll();
@@ -47,7 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void addToCart(Article article) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ArrayList<Article> getCart() throws Exception {
+	public List<Article> getCart() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

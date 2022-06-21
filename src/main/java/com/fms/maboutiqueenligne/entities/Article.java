@@ -18,31 +18,36 @@ import lombok.ToString;
 
 /**
  * Classe Article
+ * 
  * @author Stagiaires06P
  *
  */
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor @ToString
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Article implements Serializable {
-	private static final long serialVersionUID=1L;
-	
-	@Id @GeneratedValue(strategy= GenerationType.IDENTITY)
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
-	@Size(min=5, max=50)
+	@Size(min = 5, max = 50)
 	private String brand;
-	
+
 	@NotNull
-	@Size(min=5, max=50)
+	@Size(min = 5, max = 50)
 	private String description;
-	
+
 	@DecimalMin("50")
 	private double price;
-	
-	private int quantity;
-	
+
+	private int quantity = 1;
+
 	@ManyToOne
 	@NotNull
 	private Category category;

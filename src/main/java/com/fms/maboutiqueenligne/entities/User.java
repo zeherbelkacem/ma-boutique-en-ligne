@@ -1,27 +1,35 @@
 package com.fms.maboutiqueenligne.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@Entity
+@Table(name = "USERS")
 /**
  * User Entity
+ * 
  * @author Delmerie JOHN ROSE
  *
  */
@@ -31,14 +39,26 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long userId;
 
-	@NotNull
-	@Email
+	@Column(name = "EMAIL")
+	@Email(regexp = ".+[@].+[\\.].+", message = "Please enter à valid mail")
 	private String email;
 
 	@NotNull
-	@Size(min = 8, max = 16)
 	private String password;
+
+	private Boolean enable;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Role> roles = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Orders> orders;
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", enable=" + enable + "]";
+	}
 
 }

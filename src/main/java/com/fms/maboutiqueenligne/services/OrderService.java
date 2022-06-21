@@ -2,7 +2,7 @@ package com.fms.maboutiqueenligne.services;
 
 import java.util.List;
 
-import com.fms.maboutiqueenligne.entities.Order;
+import com.fms.maboutiqueenligne.entities.Orders;
 
 /**
  * Interface Order Service
@@ -18,7 +18,7 @@ public interface OrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Order> getAll() throws Exception;
+	List<Orders> getAll() throws Exception;
 
 	/**
 	 * Return Order by Id
@@ -27,7 +27,7 @@ public interface OrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	Order getOneById(long id) throws Exception;
+	Orders getOneById(long id) throws Exception;
 
 	/**
 	 * Save an order with customer id
@@ -53,5 +53,5 @@ public interface OrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Order> getAllByCustomer(long userId) throws Exception;
+	List<Orders> getAllByCustomer(long userId) throws Exception;
 }

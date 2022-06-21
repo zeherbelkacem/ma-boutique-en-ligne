@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fms.maboutiqueenligne.dao.OrderRepository;
-import com.fms.maboutiqueenligne.entities.Order;
+import com.fms.maboutiqueenligne.entities.Orders;
 
 /**
  * User service Implementation
@@ -20,12 +20,12 @@ public class OrderServiceImpl implements OrderService {
 	OrderRepository orderRepository;
 
 	@Override
-	public List<Order> getAll() throws Exception {
+	public List<Orders> getAll() throws Exception {
 		return orderRepository.findAll();
 	}
 
 	@Override
-	public Order getOneById(long id) throws Exception {
+	public Orders getOneById(long id) throws Exception {
 		return orderRepository.getReferenceById(id);
 	}
 
@@ -40,8 +40,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> getAllByCustomer(long userId) throws Exception {
-		return orderRepository.findAllByCustomerId(userId);
+	public List<Orders> getAllByCustomer(long userId) throws Exception {
+		return null;
 	}
 
 }

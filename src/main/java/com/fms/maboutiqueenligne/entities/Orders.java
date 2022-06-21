@@ -1,43 +1,45 @@
 package com.fms.maboutiqueenligne.entities;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-/**
- * OrderItem Entity
- * 
- * @author Delmerie JOHN ROSE
- *
- */
-public class OrderItem implements Serializable {
+@Entity
+@Table(name = "ORDERS")
+public class Orders implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@OneToOne
-	private Article article;
 
-	private int quantity;
-	private double price;
-	
+	@Column(name = "DATE")
+	private Date date;
+
+	@Column(name = "TOTAL_PRICE")
+	private double totalPrice;
+
+	@OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
+	private List<OrderItem> orderItems;
+
 	@ManyToOne
-	private Orders orders;
+	private User user;
 }

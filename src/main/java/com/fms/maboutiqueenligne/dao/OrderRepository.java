@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.fms.maboutiqueenligne.entities.Order;
+import com.fms.maboutiqueenligne.entities.Orders;
 
 /**
  * Order Repository
  * @author Delmerie JOHN ROSE
  *
  */
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Orders, Long> {
 	
-	public List<Order> findAllByCustomerId(long userId); 
+//	public List<Orders> findAllByCustomerId(long userId); 
 	
 }

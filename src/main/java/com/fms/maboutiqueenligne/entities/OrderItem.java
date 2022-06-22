@@ -18,7 +18,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 /**
  * OrderItem Entity
  * 
@@ -40,4 +39,12 @@ public class OrderItem implements Serializable {
 	
 	@ManyToOne
 	private Orders orders;
+
+	@Override
+	public String toString() {
+		return "OrderItem [id=" + id + ", article=" + article + ", quantity=" + quantity + ", price=" + price
+				+ ", orders=" + orders + "]";
+	}
+	
+	
 }

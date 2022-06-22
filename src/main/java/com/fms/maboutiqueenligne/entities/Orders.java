@@ -42,4 +42,12 @@ public class Orders implements Serializable {
 
 	@ManyToOne
 	private User user;
+
+	@Override
+	public String toString() {
+		return "Orders [id=" + id + ", date=" + date + ", totalPrice=" + totalPrice + ", orderItems=" + orderItems
+				+ ", user=" + user + "]";
+	}
+	
+	
 }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="utf-8">
 	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} " />
 	<title>Insert title here</title>
 </head>
@@ -10,7 +10,6 @@
 <body>
 
 	<div class="container col-6 justify-content-center mt-5">
-
 		<div class="card text-center">
 			<div class="card-header">
 				LOGIN
@@ -19,7 +18,8 @@
 				<form th:action="@{submit}" method="post">
 					<div class="mb-3">
 						<label for="exampleInputEmail1" class="form-label">Email address</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" name="email" th:value="${user.email}">
+						<input type="email" class="form-control" id="exampleInputEmail1" name="email"
+							th:value="${user.email}">
 						<span th:errors="${user.email}"></span>
 					</div>
 					<div class="mb-3">
@@ -32,14 +32,14 @@
 				</form>
 				<div th:if="${loginError == 'error'}">
 					<div class="p-1 border bg-danger d-flex justify-content-center">
-					Your password or email is incorrect!
+						Your password or email is incorrect!
 					</div>
 				</div>
 			</div>
 			<div class="card-footer text-muted">
-				
-					<button type="button" class="btn btn-secondary">Register!</button>
-					<button type="button" class="btn btn-secondary">Forgot your password!</button>
+
+				<button type="button" class="btn btn-secondary">Register!</button>
+				<button type="button" class="btn btn-secondary">Forgot your password!</button>
 			</div>
 		</div>
 

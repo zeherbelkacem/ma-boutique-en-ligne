@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="./layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin</title>
+</head>
+<body>
+<div  class="mt-4" layout:fragment="content">
+
+
+		<div class="card text-center">
+			<div class="card-header">
+				<div class="row g-2">
+
+
+					<div class="col-3">
+						<a th:href="@{ /admin }" class="w-100 btn btn-secondary btn-block">Articles</a>
+					</div>
+					<div class="col-3">
+						<a th:href="@{ /admin/categories }" class="w-100 btn btn-secondary btn-block">Categories</a>
+					</div>
+					
+					<div class="col-3">
+						<a th:href="@{ /admin }" class="w-100 btn btn-secondary btn-block">Users</a>
+					</div>
+					
+					<div class="col-3">
+						<a th:href="@{ /admin/orders }" class="w-100 btn btn-secondary btn-block">Orders</a>
+					</div>
+				</div>
+			</div>
+
+			<section layout:fragment="admin">
+
+
+
+				<div class="card-body">
+					<!-- <h5 class="card-title">List of articles</h5> -->
+					<div class="row g-3">
+						<div class="col-6 ">
+							<h3 th:text="${listOf}"></h3>
+
+						</div>
+						<div class="col-6">
+							<div class="col-6">
+								<form th:action="@{/admin}" method="GET" class="form-inline input-group">
+									<input class="form-control mr-sm-2" name="keyWord" type="search"
+										placeholder="Search" aria-label="Search">
+									<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+								</form>
+
+							</div>
+						</div>
+
+						<table class="mt-2 table table-striped table-bordered table-dark ">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>DESCRIPTION</th>
+									<th>BRAND</th>
+									<th>PRICE</th>
+									<th>QUANTITY</th>
+<!--									<th>ADD TO CART</th>-->
+									<th>DELETE</th>
+									<th>UPDATE</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="a:${listArticle}">
+									<td th:text="${a.id}">
+										</th>
+									<td th:text="${a.description}"></td>
+									<td th:text="${a.brand}">
+										</th>
+									<td th:text="${a.price}"></td>
+									<td>
+										<input type="number" value="1" min="1" max="10" name="quantity" th:value="${a.quantity}"/>
+									</td>
+<!--									<td>-->
+<!--										<a href="#" class="btn btn-success btn-sm">Add to cart</a>-->
+
+<!--									</td>-->
+									<td>
+										<a th:href="@{ admin(page=${currentPage}, size=${size}, id=${a.id}) }"
+											class="btn btn-danger btn-block"
+											onclick="return confirm('Are you sure?')"><svg
+												xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+												fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+												<path
+													d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+												<path fill-rule="evenodd"
+													d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+											</svg></a>
+									</td>
+									<td>
+										<a th:href="@{ admin/updateArticleForm(id=${a.id}) }" .
+											class="btn btn-light btn-block"><svg xmlns="http://www.w3.org/2000/svg"
+												width="16" height="16" fill="currentColor" class="bi bi-pencil-square"
+												viewBox="0 0 16 16">
+												<path
+													d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+												<path fill-rule="evenodd"
+													d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+											</svg></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div>
+						<nav aria-label="...">
+							<ul class="pagination justify-content-center">
+
+
+								<li th:class="${currentPage==0 ? 'page-item disabled' : 'page-item'} ">
+									<a class="page-link"
+										th:href="@{/admin(page=${currentPage-1}, size=${size}, keyWord=${keyWord} ) }">Previous</a>
+								</li>
+
+								<li th:each="page,status:${pages}"><a
+										th:class="${status.index==currentPage?'btn btn-primary':'btn'  }"
+										th:href="@{ /admin(page=${status.index}, size=${size}, keyWord=${keyWord}) }"
+										th:text="${status.index }"></a></li>
+
+								<li class="page-item"><a class="page-link"
+										th:href="@{ /admin(page=${currentPage+1}, size=${size}, keyWord=${keyWord} )}">Next</a>
+								</li>
+								<li class="page-item"><a class="page-link"
+										th:href="@{/admin(page=${totalPages-1}, size=${size}, keyWord=${keyWord} )}">Last</a>
+
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<div class="card-footer text-muted">
+						<a th:href="@{admin/saveArticleForm}" class="btn btn-secondary btn-lg">Add new article</a>
+					</div>
+
+			</section>
+
+		</div>
+
+	</div>
+
+
+
+
+	<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+</div>
+</body>
+</html>

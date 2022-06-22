@@ -30,7 +30,7 @@ public class ArticleController {
 			@RequestParam(name = "size", defaultValue = "5") int size,
 			@RequestParam(name = "keyWord", defaultValue = "") String keyWord,
 			@RequestParam(name = "idToCart", defaultValue = "") Long idToCart,
-			@RequestParam(name = "quantity", defaultValue = "") String quantity) {
+			@RequestParam(name = "quantity", defaultValue = "") String quantity)	{
 
 		if (idToCart != null) {
 			articleServiceImpl.addToCart(idToCart);
@@ -78,10 +78,11 @@ public class ArticleController {
 	}
 
 	@GetMapping("/shop/cart")
-	public String cart(Model model, @RequestParam(name = "idToRm", defaultValue = "") Long idToRm) {
+	public String cart(Model model, 
+			@RequestParam(name = "idToRm", defaultValue = "") Long idToRm) {
 
 		if (idToRm != null) {
-			articleServiceImpl.removeFromCart(idToRm); 
+			articleServiceImpl.removeFromCart(idToRm);
 		}
 		HashMap<Long, Article> cart = articleServiceImpl.getCart();
 		model.addAttribute("totalPrice", articleServiceImpl.getTotalCart());

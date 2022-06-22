@@ -34,7 +34,7 @@
 							<td th:text="${ca.quantity}"></td>
 							<td th:text="${ca.price}"></td>
 							<td>
-								<a class="btn btn-danger btn-sm" th:href="@{ shop(idToRm=${ca.id})}">Remove</a>
+								<a class="btn btn-danger btn-sm" th:href="@{cart(idToRm=${ca.id})}">Remove</a>
 							</td>
 						</tr>
 					</tbody>

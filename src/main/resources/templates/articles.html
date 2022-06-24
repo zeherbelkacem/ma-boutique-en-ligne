@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="./layout">
 
@@ -12,7 +12,7 @@
 		<div class="container">
 			<!--NAV CATEGORY-->
 			<nav class="navbar navbar-expand-lg justify-content-center m-3">
-				<a class="nav-link active" th:href="@{/shop}">All</a>
+				<a class="nav-link active" th:href="@{/}">All</a>
 				<ul class="nav justify-content-center" th:each="c:${categories}">
 					<li class="nav-item">
 
@@ -32,7 +32,7 @@
 						<div class="card-body">
 							<div class="row">
 								<div class="col-6">
-									<form class="d-flex" th:action="@{/shop}" method="get">
+									<form class="d-flex" th:action="@{/}" method="get">
 										<input class="form-control me-2" type="text" placeholder="Rechercher un article"
 											aria-label="Search" name="keyWord" th:value=${keyWord}>
 										<button class="btn btn-outline-primary" type="submit">Search</button>
@@ -65,7 +65,7 @@
 												<input type="number" value="1" min="1" max="10" />
 											</td>
 											<td>
-												<a th:href="@{ shop(idToCart=${a.id})}"
+												<a th:href="@{ /(idToCart=${a.id})}"
 													class="btn btn-success btn-sm">Add to cart</a>
 											</td>
 										</tr>
@@ -78,20 +78,20 @@
 								<ul class="pagination justify-content-center">
 									<li th:class="${currentPage==0 ? 'page-item disabled' : 'page-item'} ">
 										<a class="page-link"
-											th:href="@{ shop(page=${currentPage-1}, size=${size}, keyWord=${keyWord} ) }">Previous</a>
+											th:href="@{ /(page=${currentPage-1}, size=${size}, keyWord=${keyWord} ) }">Previous</a>
 									</li>
 
 									<li th:each="page,status:${pages}"><a
 											th:class="${status.index==currentPage?'btn btn-primary':'btn'  }"
-											th:href="@{ shop(page=${status.index}, size=${size}, keyWord=${keyWord}) }"
+											th:href="@{ /(page=${status.index}, size=${size}, keyWord=${keyWord}) }"
 											th:text="${status.index }"></a></li>
 
 									<li class="page-item"><a class="page-link"
-											th:href="@{ shop(page=${currentPage+1}, size=${size}, keyWord=${keyWord} )}">Next</a>
+											th:href="@{ /(page=${currentPage+1}, size=${size}, keyWord=${keyWord} )}">Next</a>
 									</li>
 									<li class="page-item">
 										<a class="page-link"
-											th:href="@{ shop(page=${pages}, size=${size}, keyWord=${keyWord} )}">Last</a>
+											th:href="@{ /(page=${pages}, size=${size}, keyWord=${keyWord} )}">Last</a>
 									</li>
 								</ul>
 							</nav>
@@ -132,7 +132,7 @@
 							</table>
 						</div>
 						<div class="card-footer text-muted">
-							<a class="btn btn-secondary btn-sm" th:href="@{/shop/cart}">See cart</a>
+							<a class="btn btn-secondary btn-sm" th:href="@{/cart}">See cart</a>
 						</div>
 					</div>
 

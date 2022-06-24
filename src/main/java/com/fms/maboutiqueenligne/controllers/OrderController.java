@@ -38,7 +38,7 @@ public class OrderController {
 	@Autowired
 	OrderServiceImpl orderServiceImpl;
 
-	@GetMapping("/shop/order")
+	@GetMapping("/order")
 	public String order(Model model) {
 
 //		model.addAttribute("user", user);
@@ -49,7 +49,7 @@ public class OrderController {
 		return "orderResume";
 	}
 
-	@GetMapping("/shop/order/validate")
+	@GetMapping("/order/validate")
 	public String validateOrder() {
 		orderServiceImpl.order();
 		return "redirect:/shop/order";

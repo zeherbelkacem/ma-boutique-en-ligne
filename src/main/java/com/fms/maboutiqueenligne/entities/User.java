@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -44,6 +46,9 @@ public class User implements Serializable {
 	@Column(name = "EMAIL")
 	@Email(regexp = ".+[@].+[\\.].+", message = "Please enter à valid mail")
 	private String email;
+	
+	@NotNull
+	private String username; 
 
 	@NotNull
 	private String password;

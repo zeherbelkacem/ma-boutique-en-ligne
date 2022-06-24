@@ -2,10 +2,14 @@ package com.fms.maboutiqueenligne.services;
 
 import java.util.List;
 
+import org.hibernate.query.criteria.LiteralHandlingMode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fms.maboutiqueenligne.dao.RoleRepository;
 import com.fms.maboutiqueenligne.dao.UserRepository;
+import com.fms.maboutiqueenligne.entities.Role;
 import com.fms.maboutiqueenligne.entities.User;
 
 /**
@@ -19,13 +23,27 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-	private long userId = 0;
+	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	private PasswordEncoder passwordEncoder;
+	
+	public UserServiceImpl(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	@Override
 	public List<User> getAll() throws Exception {
 		return userRepository.findAll();
 	}
 
+	@Override
+	public User save(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		return userRepository.save(user);
+	}
+	
 	@Override
 	public User getOneById(long id) throws Exception {
 		return userRepository.getReferenceById(id);
@@ -47,15 +65,11 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User findUserByEmailAndPassword(String email, String password) {
-		User user = userRepository.findByEmailAndPassword(email, password);
-		if(user != null) userId  = user.getUserId();
-		return user;
+	public User findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 	
-	@Override
-	public long getUserId() {
-		return userId;
+	public Role getRole(long id) {
+		return roleRepository.getReferenceById(id);
 	}
-
 }

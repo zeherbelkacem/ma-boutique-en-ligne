@@ -10,6 +10,8 @@ import com.fms.maboutiqueenligne.entities.User;
  *
  */
 public interface UserService {
+	
+	
 	/**
 	 * Return list of all users
 	 * @return
@@ -47,7 +49,18 @@ public interface UserService {
 	 * @throws Exception
 	 */
 	void delete(long id) throws Exception;
-	public User findUserByEmailAndPassword(String email, String password);
+	
+	/**
+	 * Find user by email for login
+	 * @param email
+	 * @return
+	 */
+	public User findUserByEmail(String email);
 
-	long getUserId();
+	/**
+	 * Save an user 
+	 * @param user
+	 * @return
+	 */
+	public User save(User user);
 }

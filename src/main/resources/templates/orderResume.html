@@ -55,7 +55,7 @@
 									<td th:text="${ca.quantity}"></td>
 									<td th:text="${ca.price}"></td>
 									<td>
-										<a th:href="@{ /shop/cart(idToRm=${ca.id})}"
+										<a th:href="@{cart(idToRm=${ca.id})}"
 											class="btn btn-danger btn-block">Remove
 									</td>
 								</tr>
@@ -69,7 +69,7 @@
 						</table>
 					</div>
 					<div class="card-footer text-muted">
-						<a onclick="return confirm('Are you sure?')" th:href="@{saveOrder}"
+						<a onclick="return confirm('Are you sure?')" th:href="@{order/validate}"
 							class="btn btn-secondary btn-block">Order?</a>
 					</div>
 				</div>

@@ -25,7 +25,7 @@ public class ArticleController {
 	@Autowired
 	CategoryServiceImpl categoryServiceImpl;
 
-	@GetMapping("/shop")
+	@GetMapping("/")
 	public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size,
 			@RequestParam(name = "keyWord", defaultValue = "") String keyWord,
@@ -77,7 +77,7 @@ public class ArticleController {
 		return "articles";
 	}
 
-	@GetMapping("/shop/cart")
+	@GetMapping("/cart")
 	public String cart(Model model, 
 			@RequestParam(name = "idToRm", defaultValue = "") Long idToRm) {
 

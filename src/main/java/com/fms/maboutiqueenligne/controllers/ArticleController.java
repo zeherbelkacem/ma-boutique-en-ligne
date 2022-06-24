@@ -1,14 +1,19 @@
 package com.fms.maboutiqueenligne.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fms.maboutiqueenligne.entities.Article;
@@ -20,10 +25,10 @@ import com.fms.maboutiqueenligne.services.CategoryServiceImpl;
 public class ArticleController {
 
 	@Autowired
-	ArticleServiceImpl articleServiceImpl;
+	private ArticleServiceImpl articleServiceImpl;
 
 	@Autowired
-	CategoryServiceImpl categoryServiceImpl;
+	private CategoryServiceImpl categoryServiceImpl;
 
 	@GetMapping("/shop")
 	public String index(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
@@ -89,5 +94,46 @@ public class ArticleController {
 		model.addAttribute("totalCartArticles", cart.values().size());
 		model.addAttribute("cartArticles", cart.values());
 		return "cart";
+	}
+	
+	@GetMapping("admin/saveArticleForm")
+	public String saveArticleForm(Model model) {
+		model.addAttribute("category", categoryServiceImpl.readAllCategories());
+		model.addAttribute("article", new Article());
+		return "saveNewArticle";
+	}
+	
+	@PostMapping("admin/saveArticle")
+	public String saveArticle(@Valid Article article, BindingResult bindingResult,
+			@RequestParam("catName") String catName) {
+		
+		if (bindingResult.hasErrors()) {
+			return "redirect:/admin/saveArticleForm";
+		}
+		article.setCategory(categoryServiceImpl.getCategoryByName(catName));
+		
+		articleServiceImpl.saveArticle(article);
+		
+		return "redirect:/shop";
+	}
+	
+	@GetMapping("admin/updateArticleForm")
+	public String updateArticleForm(@RequestParam(name = "id", defaultValue = "") Long id, Model model) {
+		System.out.println(id);
+		List<String>  CategoryNames = new ArrayList<String>();
+		for(Category c : categoryServiceImpl.readAllCategories() ){
+			CategoryNames.add(c.getName());
+		}
+		model.addAttribute("categoriesName", CategoryNames);
+		model.addAttribute("category", categoryServiceImpl.readAllCategories());
+		model.addAttribute("article", articleServiceImpl.readById(id));
+		return "saveNewArticle";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(Long id) {
+		articleServiceImpl.deleteById(id);
+		return "redirect:/shop";
+
 	}
 }

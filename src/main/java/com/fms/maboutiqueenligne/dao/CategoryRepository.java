@@ -8,6 +8,8 @@ import com.fms.maboutiqueenligne.entities.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
+	public Category findByName(String catName);
+
 	
 	
 }

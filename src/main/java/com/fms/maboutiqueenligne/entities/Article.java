@@ -11,6 +11,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,12 +34,13 @@ public class Article implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
+	@NotNull(message = "Le champ doit contenir au moins 5 caractères")
 	@Size(min = 5, max = 50)
 	private String brand;
 
-	@NotNull
+	
 	@Size(min = 5, max = 50)
+	@NotNull(message = "stringValue has to be present")
 	private String description;
 
 	@DecimalMin("50")
@@ -47,14 +49,22 @@ public class Article implements Serializable {
 	private int quantity = 1;
 
 	@ManyToOne
-	@NotNull
 	private Category category;
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", brand=" + brand + ", description=" + description + ", price=" + price
-				+ ", quantity=" + quantity + ", category=" + category + "]";
+		return "Article [id=" + id + ", brand=" + brand + ", description=" + description + ", price=" + price;
+				//+ ", quantity=" + quantity + ", category=" + category + "]";
 	}
 	
+	
+	public Article(@Size(min = 5, max = 50) String description, @Size(min = 5, max = 50)
+	String brand, @DecimalMin("50") double price, Category category) {
+		super();
+		this.description = description;
+		this.brand=brand;
+		this.price = price;
+		this.category = category;
+	}
 	
 }

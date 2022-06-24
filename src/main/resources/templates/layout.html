@@ -24,11 +24,11 @@
 					<li class="nav-item">
 						<a class="nav-link text-white">Catégorie</a>
 					</li>
-					<li class="nav-item" >
-						<a class="nav-link text-white" th:href="@{/admin}" sec:authorize="hasAnyRole('ADMIN')">Admin</a>
+					<li class="nav-item">
+						<a class="nav-link text-white" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/admin}">Admin</a>
 					</li>
 				</ul>
-				<ul class="navbar-nav">
+				<ul class="navbar-nav" sec:authorize="isAuthenticated()">
 					<li class="nav-item">
 						<a class="btn btn-danger btn-sm" th:href="@{logout}">Logout</a>
 					</li>

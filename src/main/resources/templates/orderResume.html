@@ -10,67 +10,76 @@
 
 <body>
 	<div class="mt-4" layout:fragment="content">
+		<div class="container">
 
-		<div class="row g-2">
-			<div class="col-6">
-				<div class="card text-center">
-					<div class="card-header">
-						<h1>Customer informations</h1>
-					</div>
 
-					<div class="card-body">
-						<table class="table table-light table-striped table-hover">
-							<tbody>
-								<tr> Customer: </tr>
-								<!--<tr th:text="${ user.email}"></tr>-->
-								<tr>TEST</tr>
-								</br>
-								<tr> Date: </tr>
-								<tr th:text="${ date}"></tr>
-							</tbody>
-						</table>
+			<div class="row g-2">
+				<div class="col-6">
+					<div class="card text-center">
+						<div class="card-header">
+							<h1>Customer informations</h1>
+						</div>
+
+						<div class="card-body">
+							<table class="table table-light table-striped table-hover">
+								<tbody>
+									<tr> Customer: </tr>
+									<!--<tr th:text="${ user.email}"></tr>-->
+									<tr>TEST</tr>
+									</br>
+									<tr> Date: </tr>
+									<tr th:text="${ date}"></tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-6">
-				<div class="card text-center">
-					<div class="card-header">
-						<h1>My Cart</h1>
-					</div>
+				<div class="col-6">
+					<div class="card text-center">
+						<div class="card-header">
+							<h1>My Cart</h1>
+						</div>
 
 
-					<div class="card-body">
-						<table class="table table-dark table-striped table-hover">
-							<thead>
-								<tr>
-									<th>DESCRIPTION</th>
-									<th>QUANTITY</th>
-									<th>PRICE</th>
-									<th>WITHDRAW</th>
+						<div class="card-body">
+							<table class="table table-dark table-striped table-hover">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>DESCRIPTION</th>
+										<th>QUANTITY</th>
+										<th>UNIT PRICE</th>
+										<th>TOTAL</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="ca:${cartArticles}">
+										<td th:text="${ca.id}"></td>
+										<td th:text="${ca.description}"></td>
+										<td th:text="${ca.quantity}"></td>
+										<td th:text="${ca.price}"></td>
+										<td th:text="${ca.price * ca.quantity }"></td>
+										<td>
+											<a class="btn btn-danger btn-sm"
+												th:href="@{cart(idToRm=${ca.id})}">Remove</a>
+										</td>
+									</tr>
+								</tbody>
+								<tr class="bg-success">
+									<td>Total</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td th:text="${totalPrice}"></td>
+									<td></td>
 								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="ca:${cartArticles}">
-									<td th:text="${ca.description}"></td>
-									<td th:text="${ca.quantity}"></td>
-									<td th:text="${ca.price}"></td>
-									<td>
-										<a th:href="@{cart(idToRm=${ca.id})}"
-											class="btn btn-danger btn-block">Remove
-									</td>
-								</tr>
-							</tbody>/
-							<tr class="bg-success">
-								<td>Total</td>
-								<td></td>
-								<td th:text="${totalPrice}"></td>
-								<td></td>
-							</tr>
-						</table>
-					</div>
-					<div class="card-footer text-muted">
-						<a onclick="return confirm('Are you sure?')" th:href="@{order/validate}"
-							class="btn btn-secondary btn-block">Order?</a>
+							</table>
+						</div>
+						<div class="card-footer text-muted">
+							<a onclick="return confirm('Are you sure?')" th:href="@{order/validate}"
+								class="btn btn-secondary btn-block">Order?</a>
+						</div>
 					</div>
 				</div>
 			</div>

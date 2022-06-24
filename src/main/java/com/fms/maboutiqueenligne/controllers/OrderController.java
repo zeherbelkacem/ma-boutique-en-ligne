@@ -52,7 +52,7 @@ public class OrderController {
 	@GetMapping("/order/validate")
 	public String validateOrder() {
 		orderServiceImpl.order();
-		return "redirect:/shop/order";
+		return "redirect:/order";
 	}
 	
 

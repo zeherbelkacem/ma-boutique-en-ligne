@@ -26,6 +26,11 @@ public class SecurityController {
 		return "redirect:login";
 	}
 	
+	@GetMapping("/403")
+	public String error() {
+		return "403";
+	}
+	
 
 //	@Autowired
 //	UserServiceImpl userServiceImpl;

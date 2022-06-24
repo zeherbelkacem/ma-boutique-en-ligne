@@ -32,4 +32,12 @@ public interface CategoryService {
 	 */
 	public void delete (long id);
 
+	public List<Category> readAllCategories();
+
+	public Category getCategoryByName(String catName);
+
+	public Category getCategoryById(Long idCat);
+
+	public Category saveCategory(Category category);
+
 }

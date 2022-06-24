@@ -39,7 +39,7 @@ public interface ArticleService {
 	 * @param article
 	 * @return un article
 	 */
-	public Article save(Article article) throws Exception;
+//	public Article save(Article article) throws Exception;
 
 	/**
 	 * Fonction qui retourne les articles classés par pages
@@ -75,5 +75,27 @@ public interface ArticleService {
 	 * @return
 	 */
 	public Page<Article> getAllBySearch(String search, Pageable pageable);
+
+	/**
+	 * Fonction qui sert à rajouter un article par l'administrateur et à le mettre à jour
+	 * @param article
+	 * @return un article
+	 */
+	public Article saveArticle(Article article);
+	
+	/**
+	 * Fonction qui recherche un article par son identifiant
+	 * @param id
+	 * @return un article
+ */
+	public Article readById(Long id);
+
+	/**
+	 * Fonction qui permet à l'administrateur de supprimer un article
+	 * @param id
+	 */
+	void deleteById(Long id);
+
+	
 
 }

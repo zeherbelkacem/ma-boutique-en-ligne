@@ -13,10 +13,11 @@ public class MaBoutiqueEnLigneApplication implements CommandLineRunner {
 	}
 	
 
+
 	@Override
 	public void run(String... args) throws Exception {
-	
 		
+
 	}
 
 }

@@ -3,8 +3,11 @@ package com.fms.maboutiqueenligne.services;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -31,11 +34,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public Article getOneById(long id) {
 		return articleRepository.findById(id).get();
-	}
-
-	@Override
-	public Article save(Article article) throws Exception {
-		return articleRepository.save(article);
 	}
 
 	@Override
@@ -80,9 +78,31 @@ public class ArticleServiceImpl implements ArticleService {
 		return cart;
 	}
 
+
 	@Override
-	public Page<Article> getAllBySearch(String search, Pageable pageable) {
-		return articleRepository.findByDescriptionContainsOrBrandContains(search, search, pageable);
+	public Article saveArticle(Article article) {
+		return articleRepository.save(article);
 	}
 
-}
+	@Override
+	public Article readById(Long id) {
+		return articleRepository.findById(id).get();
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		articleRepository.deleteById(id);
+		
+	}
+	@Override
+	public Page<Article> getAllBySearch(String search, Pageable pageable) {
+		return articleRepository.findByBrandContains(search, pageable);
+	}
+	}
+
+	
+
+
+	
+
+

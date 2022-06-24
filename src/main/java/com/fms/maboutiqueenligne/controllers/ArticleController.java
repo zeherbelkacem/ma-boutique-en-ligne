@@ -71,7 +71,7 @@ public class ArticleController {
 		Category category = categoryServiceImpl.getOneById(catId);
 
 		model.addAttribute("categories", categories);
-		model.addAttribute("title", category.getName() + " caterory");
+		model.addAttribute("title", category.getName() + " category");
 		model.addAttribute("size", size);
 		model.addAttribute("articles", articles.getContent());
 		model.addAttribute("pages", new int[articles.getTotalPages()]);
@@ -98,32 +98,38 @@ public class ArticleController {
 	
 	@GetMapping("admin/saveArticleForm")
 	public String saveArticleForm(Model model) {
+		model.addAttribute("title", "Add new article");
 		model.addAttribute("category", categoryServiceImpl.readAllCategories());
 		model.addAttribute("article", new Article());
 		return "saveNewArticle";
 	}
 	
 	@PostMapping("admin/saveArticle")
-	public String saveArticle(@Valid Article article, BindingResult bindingResult,
+	public String saveArticle(Model model, @Valid Article article, BindingResult bindingResult,
 			@RequestParam("catName") String catName) {
 		
-		if (bindingResult.hasErrors()) {
-			return "redirect:/admin/saveArticleForm";
-		}
 		article.setCategory(categoryServiceImpl.getCategoryByName(catName));
-		
-		articleServiceImpl.saveArticle(article);
-		
-		return "redirect:/shop";
-	}
-	
-	@GetMapping("admin/updateArticleForm")
-	public String updateArticleForm(@RequestParam(name = "id", defaultValue = "") Long id, Model model) {
-		System.out.println(id);
+		model.addAttribute("category", categoryServiceImpl.readAllCategories());
 		List<String>  CategoryNames = new ArrayList<String>();
 		for(Category c : categoryServiceImpl.readAllCategories() ){
 			CategoryNames.add(c.getName());
 		}
+		model.addAttribute("categoriesName", CategoryNames);
+		if (bindingResult.hasErrors()) {
+			return "saveNewArticle";
+		}
+		articleServiceImpl.saveArticle(article);
+		return "redirect:/admin";
+	}
+	
+	@GetMapping("admin/updateArticleForm")
+	public String updateArticleForm(@RequestParam(name = "id", defaultValue = "") Long id, Model model) {
+
+		List<String>  CategoryNames = new ArrayList<String>();
+		for(Category c : categoryServiceImpl.readAllCategories() ){
+			CategoryNames.add(c.getName());
+		}
+		model.addAttribute("title", "Edit this article");
 		model.addAttribute("categoriesName", CategoryNames);
 		model.addAttribute("category", categoryServiceImpl.readAllCategories());
 		model.addAttribute("article", articleServiceImpl.readById(id));

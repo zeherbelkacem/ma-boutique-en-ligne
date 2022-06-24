@@ -25,17 +25,6 @@ public class AdminController {
 			@RequestParam(name = "keyWord", defaultValue = "") String keyWord,
 			@RequestParam(name = "id", defaultValue = "") Long id) {
 
-		/*
-		 * Pagination without key word
-		 */
-//		Page<Article> articles = articleService.readArticlesPageByPage(page, size);
-		/*
-		 * Pagination using key word
-		 */
-
-		/*
-		 * 
-		 */
 		if (id != null)
 			articleServiceImpl.deleteById(id);
 

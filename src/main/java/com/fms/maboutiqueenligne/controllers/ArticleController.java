@@ -35,7 +35,7 @@ public class ArticleController {
 			@RequestParam(name = "size", defaultValue = "5") int size,
 			@RequestParam(name = "keyWord", defaultValue = "") String keyWord,
 			@RequestParam(name = "idToCart", defaultValue = "") Long idToCart,
-			@RequestParam(name = "quantity", defaultValue = "") String quantity)	{
+			@RequestParam(name = "quantity", defaultValue = "") String quantity) {
 
 		if (idToCart != null) {
 			articleServiceImpl.addToCart(idToCart);
@@ -83,8 +83,7 @@ public class ArticleController {
 	}
 
 	@GetMapping("/cart")
-	public String cart(Model model, 
-			@RequestParam(name = "idToRm", defaultValue = "") Long idToRm) {
+	public String cart(Model model, @RequestParam(name = "idToRm", defaultValue = "") Long idToRm) {
 
 		if (idToRm != null) {
 			articleServiceImpl.removeFromCart(idToRm);
@@ -95,7 +94,7 @@ public class ArticleController {
 		model.addAttribute("cartArticles", cart.values());
 		return "cart";
 	}
-	
+
 	@GetMapping("admin/saveArticleForm")
 	public String saveArticleForm(Model model) {
 		model.addAttribute("title", "Add new article");
@@ -103,15 +102,15 @@ public class ArticleController {
 		model.addAttribute("article", new Article());
 		return "saveNewArticle";
 	}
-	
+
 	@PostMapping("admin/saveArticle")
 	public String saveArticle(Model model, @Valid Article article, BindingResult bindingResult,
 			@RequestParam("catName") String catName) {
-		
+
 		article.setCategory(categoryServiceImpl.getCategoryByName(catName));
 		model.addAttribute("category", categoryServiceImpl.readAllCategories());
-		List<String>  CategoryNames = new ArrayList<String>();
-		for(Category c : categoryServiceImpl.readAllCategories() ){
+		List<String> CategoryNames = new ArrayList<String>();
+		for (Category c : categoryServiceImpl.readAllCategories()) {
 			CategoryNames.add(c.getName());
 		}
 		model.addAttribute("categoriesName", CategoryNames);
@@ -121,12 +120,12 @@ public class ArticleController {
 		articleServiceImpl.saveArticle(article);
 		return "redirect:/admin";
 	}
-	
+
 	@GetMapping("admin/updateArticleForm")
 	public String updateArticleForm(@RequestParam(name = "id", defaultValue = "") Long id, Model model) {
 
-		List<String>  CategoryNames = new ArrayList<String>();
-		for(Category c : categoryServiceImpl.readAllCategories() ){
+		List<String> CategoryNames = new ArrayList<String>();
+		for (Category c : categoryServiceImpl.readAllCategories()) {
 			CategoryNames.add(c.getName());
 		}
 		model.addAttribute("title", "Edit this article");
@@ -135,11 +134,10 @@ public class ArticleController {
 		model.addAttribute("article", articleServiceImpl.readById(id));
 		return "saveNewArticle";
 	}
-	
+
 	@GetMapping("/delete")
 	public String delete(Long id) {
 		articleServiceImpl.deleteById(id);
 		return "redirect:/shop";
-
 	}
 }

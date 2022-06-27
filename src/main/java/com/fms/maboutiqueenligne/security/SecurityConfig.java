@@ -74,17 +74,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 				User userAuthService = null;
 
-				if (userToLog == null) {
-					System.out.println("pas trouvé");
-					throw new UsernameNotFoundException("User with email: " + email + " not found");
-				} else {
-					userToLog.getRoles().forEach(role -> {
-						String roleName = userServiceImpl.getRole(role.getRoleId()).getName();
-						GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + roleName);
-						grantedAuthorities.add(grantedAuthority);
-					});
-					userAuthService = new User(userToLog.getEmail(), userToLog.getPassword(), grantedAuthorities);
-				}
+				userToLog.getRoles().forEach(role -> {
+					String roleName = userServiceImpl.getRole(role.getRoleId()).getName();
+					GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + roleName);
+					grantedAuthorities.add(grantedAuthority);
+				});
+				userAuthService = new User(userToLog.getEmail(), userToLog.getPassword(), grantedAuthorities);
+
 				return userAuthService;
 			}
 		});
@@ -96,10 +92,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeHttpRequests().antMatchers("/shop").permitAll();
 		http.authorizeHttpRequests().antMatchers("/order").hasAuthority("ROLE_USER");
 		http.authorizeHttpRequests().antMatchers("/admin").hasAuthority("ROLE_ADMIN");
-
 		http.exceptionHandling().accessDeniedPage("/403");
-//		http.authorizeHttpRequests().anyRequest().authenticated();
-//		http.authorizeHttpRequests().antMatchers("/order**").hasRole("USER");
-//		http.authorizeHttpRequests().antMatchers("/admin**/**").hasRole("ADMIN");
 	}
 }

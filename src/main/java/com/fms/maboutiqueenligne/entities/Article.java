@@ -35,7 +35,7 @@ public class Article implements Serializable {
 	private Long id;
 
 	@NotNull(message = "Le champ doit contenir au moins 5 caractères")
-	@Size(min = 5, max = 50)
+	@Size(min = 2, max = 50)
 	private String brand;
 
 	

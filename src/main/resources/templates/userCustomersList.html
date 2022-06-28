@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+
+<head>
+	<title>SHOP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+</head>
+
+<body>
+	<div class="mt-4" layout:fragment="content">
+		<div class="container">
+			<div class="card text-center">
+				<div class="card-header">
+					<h1>Your different customers addresses</h1>
+				</div>
+
+				<div class="card-body">
+					<table class="table table-dark table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Fisrt Name</th>
+								<th>Last Name</th>
+								<th>Address</th>
+								<th>Phone</th>
+								<th>Delete</th>
+								<th>Update</th>
+								<th>Choose this person</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cu:${userCustomersList}">
+								<td th:text="${cu.firstName}"></td>
+								<td th:text="${cu.lastName.toUpperCase()}"></td>
+								<td th:text="${cu.address}"></td>
+								<td th:text="${cu.phone}"></td>
+								<td>
+									<a><i class="fas fa-trash-alt"></i></a>
+								</td>
+								<td>
+									<a><i class="fas fa-edit"></i></a>
+								</td>
+								<td>
+									<a th:href="@{order(customerId=${cu.id})}"
+										class="btn btn-success btn-sm btn-block">Select this address</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="card-footer text-muted">
+				<a th:href="@{chooseCustomer(add=${'add'})}" class="btn btn-secondary btn-block">Add new person</a>
+			</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>

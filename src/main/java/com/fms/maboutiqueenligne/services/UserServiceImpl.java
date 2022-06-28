@@ -2,13 +2,13 @@ package com.fms.maboutiqueenligne.services;
 
 import java.util.List;
 
-import org.hibernate.query.criteria.LiteralHandlingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fms.maboutiqueenligne.dao.RoleRepository;
 import com.fms.maboutiqueenligne.dao.UserRepository;
+import com.fms.maboutiqueenligne.entities.Orders;
 import com.fms.maboutiqueenligne.entities.Role;
 import com.fms.maboutiqueenligne.entities.User;
 
@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	RoleRepository roleRepository;
 	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	public UserServiceImpl(PasswordEncoder passwordEncoder) {

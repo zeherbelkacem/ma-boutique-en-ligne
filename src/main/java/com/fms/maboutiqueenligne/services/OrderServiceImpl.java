@@ -30,6 +30,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	ArticleServiceImpl articleServiceImpl;
+	
+	@Autowired
+	CustomerServiceImpl customerServiceImpl;
 
 	@Override
 	public List<Orders> getAll() throws Exception {
@@ -43,9 +46,9 @@ public class OrderServiceImpl implements OrderService {
 
 
 	@Override
-	public Orders order() {
+	public Orders order(long customerId) {
 
-		orderRepository.save(new Orders(0, new Date(), articleServiceImpl.getTotalCart(), null, null)); //save order
+		orderRepository.save(new Orders(0, new Date(), articleServiceImpl.getTotalCart(), null, customerServiceImpl.readById(customerId))); //save order
 		long lastOrderId = getLastOrderId(); //get id after insert
 
 		//save each item order
@@ -56,16 +59,8 @@ public class OrderServiceImpl implements OrderService {
 
 		articleServiceImpl.getCart().clear(); //clear cart
 		
-//		/*
-//		 * Update the last default order saving after that all order items were saved
-//		 * (and clear the bucket)
-//		 */
-//		Order orderToSave = new Order(lastOrderId, new Date(), articleService.getTotalSum(), null,
-//				userService.readById(userService.getUserId()));
-//		articleService.getMyCart().clear();
-
-//		return orderRepository.save(orderToSave);
-		return orderRepository.findById(lastOrderId).get();
+		Orders orderToSave = orderRepository.getReferenceById(lastOrderId);
+		return orderToSave;
 	}
 
 	@Override
@@ -74,8 +69,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Orders> getAllByCustomer(long userId) throws Exception {
-		return null;
+	public List<Orders> getAllByCustomer(long customerId) {
+		return orderRepository.findAllByCustomerId(customerId);
 	}
 
 	@Override

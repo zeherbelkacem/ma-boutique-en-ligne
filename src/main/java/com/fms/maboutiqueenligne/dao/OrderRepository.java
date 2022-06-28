@@ -13,6 +13,6 @@ import com.fms.maboutiqueenligne.entities.Orders;
  */
 public interface OrderRepository extends JpaRepository<Orders, Long> {
 	
-//	public List<Orders> findAllByCustomerId(long userId); 
+	public List<Orders> findAllByCustomerId(long customerId); 
 	
 }

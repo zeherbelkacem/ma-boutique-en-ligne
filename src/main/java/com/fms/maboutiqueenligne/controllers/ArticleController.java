@@ -115,6 +115,11 @@ public class ArticleController {
 		}
 		model.addAttribute("categoriesName", CategoryNames);
 		if (bindingResult.hasErrors()) {
+			if (article.getId() != null) {
+				model.addAttribute("title", "Edit this article");
+			} else {
+				model.addAttribute("title", "Add new article");
+			}
 			return "saveNewArticle";
 		}
 		articleServiceImpl.saveArticle(article);

@@ -6,7 +6,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,8 +17,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fms.maboutiqueenligne.services.UserServiceImpl;
 
@@ -54,10 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 ////		http.authorizeHttpRequests().antMatchers("/order").hasAuthority("USER");
 //	}
 //
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -79,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + roleName);
 					grantedAuthorities.add(grantedAuthority);
 				});
-				userAuthService = new User(userToLog.getEmail(), userToLog.getPassword(), grantedAuthorities);
+				userAuthService = new User(userToLog.getEmail(), userToLog.getPassword(), userToLog.getEnable(), true, true, true, grantedAuthorities);
 
 				return userAuthService;
 			}
@@ -91,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin();
 		http.authorizeHttpRequests().antMatchers("/shop").permitAll();
 		http.authorizeHttpRequests().antMatchers("/order").hasAuthority("ROLE_USER");
+		http.authorizeHttpRequests().antMatchers("/chooseCustomer/**/**").authenticated();
 		http.authorizeHttpRequests().antMatchers("/admin").hasAuthority("ROLE_ADMIN");
 		http.exceptionHandling().accessDeniedPage("/403");
 	}

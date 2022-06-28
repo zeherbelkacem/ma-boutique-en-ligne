@@ -34,4 +34,11 @@ public class Role implements Serializable {
 	@ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
 	private List<User> users = new ArrayList<User>();
 
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", name=" + name + ", users=" + users + "]";
+	}
+	
+	
+
 }

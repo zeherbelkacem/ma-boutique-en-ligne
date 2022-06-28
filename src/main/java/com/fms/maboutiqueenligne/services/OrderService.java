@@ -34,7 +34,7 @@ public interface OrderService {
 	 * Save an order with customer id
 	 * @return
 	 */
-	public Orders order();
+	public Orders order(long customerId);
 
 	/**
 	 * Delete an order by id
@@ -51,7 +51,7 @@ public interface OrderService {
 	 * @return
 	 * @throws Exception
 	 */
-	List<Orders> getAllByCustomer(long userId) throws Exception;
+	List<Orders> getAllByCustomer(long customerId);
 	
 	/**
 	 * Save an item in order

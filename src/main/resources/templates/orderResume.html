@@ -15,20 +15,26 @@
 
 			<div class="row g-2">
 				<div class="col-6">
-					<div class="card text-center">
-						<div class="card-header">
+					<div class="card">
+						<div class="card-header text-center">
 							<h1>Customer informations</h1>
 						</div>
 
 						<div class="card-body">
 							<table class="table table-light table-striped table-hover">
 								<tbody>
-									<tr> Customer: </tr>
-									<!--<tr th:text="${ user.email}"></tr>-->
-									<tr>TEST</tr>
+									<tr><Strong>Customer : </Strong></tr>
+									<tr th:text="${ customer.firstName +' '}"></tr>
+									<tr th:text="${ customer.lastName}"></tr>
 									</br>
-									<tr> Date: </tr>
-									<tr th:text="${ date}"></tr>
+									<tr><Strong>Address : </Strong></tr><br>
+									<tr th:text="${ customer.address}"></tr>
+									</br>
+									<tr><Strong>Phone : </Strong></tr>
+									<tr th:text="${ customer.phone}"></tr>
+									</br>
+									<tr><Strong>Email : </Strong></tr>
+									<tr th:text="${ customer.email}"></tr>
 								</tbody>
 							</table>
 						</div>
@@ -50,7 +56,6 @@
 										<th>QUANTITY</th>
 										<th>UNIT PRICE</th>
 										<th>TOTAL</th>
-										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -60,10 +65,6 @@
 										<td th:text="${ca.quantity}"></td>
 										<td th:text="${ca.price}"></td>
 										<td th:text="${ca.price * ca.quantity }"></td>
-										<td>
-											<a class="btn btn-danger btn-sm"
-												th:href="@{cart(idToRm=${ca.id})}">Remove</a>
-										</td>
 									</tr>
 								</tbody>
 								<tr class="bg-success">
@@ -72,13 +73,13 @@
 									<td></td>
 									<td></td>
 									<td th:text="${totalPrice}"></td>
-									<td></td>
 								</tr>
 							</table>
 						</div>
 						<div class="card-footer text-muted">
-							<a onclick="return confirm('Are you sure?')" th:href="@{order/validate}"
-								class="btn btn-secondary btn-block">Order?</a>
+							<a onclick="return confirm('Are you sure?')"
+								th:href="@{saveOrder(customerId=${customer.id})}"
+								class="btn btn-secondary btn-block">Order</a>
 						</div>
 					</div>
 				</div>

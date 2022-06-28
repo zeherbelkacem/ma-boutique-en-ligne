@@ -41,12 +41,12 @@ public class Orders implements Serializable {
 	private List<OrderItem> orderItems;
 
 	@ManyToOne
-	private User user;
+	private Customer customer;
 
 	@Override
 	public String toString() {
 		return "Orders [id=" + id + ", date=" + date + ", totalPrice=" + totalPrice + ", orderItems=" + orderItems
-				+ ", user=" + user + "]";
+				+ ", customer=" + customer + "]";
 	}
 	
 	

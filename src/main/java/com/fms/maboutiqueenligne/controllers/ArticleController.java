@@ -46,6 +46,7 @@ public class ArticleController {
 		Page<Article> articles = articleServiceImpl.getAllBySearch(keyWord, PageRequest.of(page, size));
 
 		model.addAttribute("categories", categories);
+		model.addAttribute("totalCartArticles", cart.size());
 		model.addAttribute("title", "Tous les articles");
 		model.addAttribute("size", size);
 		model.addAttribute("articles", articles.getContent());

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="admin">
+
+<head>
+	<title>SHOP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" rel="stylesheet"
+		type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+</head>
+
+<body>
+	<div layout:fragment="admin">
+		<div class="card text-center">
+
+			<div class="card-body">
+				<!-- <h5 class="card-title">List of articles</h5> -->
+				<div class="row g-3">
+					<div class="col-6 ">
+						<h3 th:text="${listOf}"></h3>
+
+					</div>
+					<div class="col-6">
+						<form class="form-inline input-group">
+							<input class="form-control mr-sm-2" name="usename" type="search" placeholder="Search"
+								aria-label="Search">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+						</form>
+					</div>
+				</div>
+				<table class="mt-2 table table-striped table-bordered table-dark ">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>NAME</th>
+							<th>ACTIVE</th>
+							<th>ROLES</th>
+							<th>CUSTOMERS & ORDERS</th>
+							<th>Delete</th>
+							<th>Edit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="u:${listUsers}">
+							<td th:text="${u.userId}">
+								</th>
+							<td th:text="${u.username}"></td>
+							<td th:text="${u.enable}"></td>
+							<td> <select name="role" class="form-control">
+									<option th:each="r : ${u.roles}" th:text="${r.name}"></option>
+								</select></td>
+							<td>
+								<a href="#" class="btn btn-success btn-block">Get customers & orders</a>
+							</td>
+
+							<td>
+								<a th:href="@{users(userId=${u.userId }, page=${currentPage}, size=${size})}"
+									onclick="return confirm('Are you sure?')"><i class="fas fa-trash-alt"></i></a>
+							</td>
+
+
+							<td>
+								<a th:href="@{users/updateUserForm(userId=${u.userId})}"><i class="fas fa-edit"></i></a>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<nav aria-label="...">
+						<ul class="pagination justify-content-center">
+
+
+							<li th:class="${currentPage==0 ? 'page-item disabled' : 'page-item'} ">
+								<a class="page-link"
+									th:href="@{users(page=${currentPage-1}, size=${size}, date=${usename} ) }">Previous</a>
+							</li>
+
+							<li th:each="page,status:${pages}"><a
+									th:class="${status.index==currentPage?'btn btn-primary':'btn'  }"
+									th:href="@{ users(page=${status.index}, size=${size}, date=${usename}) }"
+									th:text="${status.index }"></a></li>
+
+							<li class="page-item"><a class="page-link"
+									th:href="@{ users(page=${currentPage+1}, size=${size}, date=${usename} )}">Next</a>
+							</li>
+							<li class="page-item"><a class="page-link"
+									th:href="@{users(page=${totalPages-1}, size=${size}, date=${email} )}">Last</a>
+
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<div class="card-footer text-muted">
+					<a th:href="@{users/saveUserForm}" class="btn btn-secondary btn-lg">Add new user</a>
+				</div>
+
+				</section>
+
+			</div>
+
+		</div>
+
+
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"></script>
+</body>
+
+</html>

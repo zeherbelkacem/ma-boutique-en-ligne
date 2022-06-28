@@ -2,6 +2,9 @@ package com.fms.maboutiqueenligne.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.fms.maboutiqueenligne.entities.User;
 
 /**
@@ -63,4 +66,6 @@ public interface UserService {
 	 * @return
 	 */
 	public User save(User user);
+
+	Page<User> findByPageByPageAndEmail(String email, Pageable pageable);
 }

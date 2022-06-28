@@ -2,6 +2,9 @@ package com.fms.maboutiqueenligne.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.fms.maboutiqueenligne.entities.OrderItem;
 import com.fms.maboutiqueenligne.entities.Orders;
 
@@ -65,4 +68,6 @@ public interface OrderService {
 	 * @return
 	 */
 	public long getLastOrderId();
+
+	Page<Orders> ordersPageByPage(Pageable pageable);
 }

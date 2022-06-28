@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fms.maboutiqueenligne.dao.OrderItemRepository;
@@ -89,4 +91,8 @@ public class OrderServiceImpl implements OrderService {
 		return lastInsertedId;
 	}
 
+	@Override
+	public Page<Orders> ordersPageByPage(Pageable pageable) {
+		return orderRepository.findAll(pageable);
+	}
 }

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="shop">
+
+<head>
+	<title>SHOP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css} " />
+</head>
+
+</head>
+
+<body>
+
+	<div layout:fragment="section">
+		<div class="container d-flex justify-content-center ">
+			<div class="card text-center col-6 justify-content-center">
+				<div class="card-header">
+					<h5 class="card-title">Registration</h5>
+				</div>
+				<div class="card-body">
+
+					<form th:action="@{registration}" method="post">
+						
+						<div class="form-group mb-3">
+							<label class="control-label">UserName</label>
+							<input type="text" class="form-control" name="userName" th:value="${user.userName}">
+							<span th:error="${user.userName}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group mb-3">
+							<label class="control-label">Password</label>
+							<input type="text" class="form-control" name="password" th:value="${user.password}">
+							<span th:errors="${user.password}" class="text-danger"></span>
+						</div>
+
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}">
+	</script>
+	<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

@@ -1,68 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout">
+	layout:decorate="shop">
 
 <head>
 	<title>SHOP</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css} " />
 </head>
 
 </head>
 
 <body>
-	<div layout:fragment="content">
-		<div class="container col-md-6 mt-5">
-			<div class="card">
-				<div class="card-header">
-					<h5 class="card-title" th:text="${title}"></h5>
-				</div>
-				<div class="card-body">
-					<form th:action="@{saveArticle}" method="post">
-						<div th:if="${article.getCategory() != null}">
-							<div class="form-group mb-3">
-								<label class="control-label"></label>
-								<input type="hidden" class="form-control" name="id" th:value="${article.id}">
-								<span th:errors="${article.id}" class="text-danger"></span>
-							</div>
-						</div>
-						<div class="form-group mb-3">
-							<label class="control-label">Description</label>
-							<input type="text" class="form-control" name="description"
-								th:value="${article.description}">
-							<span th:errors="${article.description}" class="text-danger"></span>
-						</div>
-						<div class="form-group mb-3">
-							<label class="control-label">Brand</label>
-							<input type="text" class="form-control" name="brand" th:value="${article.brand}">
-							<span th:errors="${article.brand}" class="text-danger"></span>
-						</div>
+	<div layout:fragment="section">
+		<div class="card text-center">
+			<div class="card-header">
+				<h5 class="card-title">Add new article</h5>
+			</div>
+			<div class="card-body">
 
-						<div class="form-group mb-3">
-							<label class="control-label">Price</label>
-							<input type="text" class="form-control" name="price" th:value="${article.price}">
-							<span th:errors="${article.price}" class="text-danger"></span>
+				<form th:action="@{saveArticle}" method="post">
+					<div th:if="${article.getCategory() != null}">
+						<div class="form-group">
+							<label class="control-label"></label> <!--ID-->
+							<input type="hidden" class="form-control" name="id" th:value="${article.id}">
+							<span th:error="${article.id}" class="text-danger"></span>
 						</div>
-						<div class="form-group mb-3">
-							<label class="control-label">Category</label>
-							<select name="catName" class="form-control mb-3">
-								<option>Sélectionnez</option>
-								<div th:if="${article.getCategory() != null}">
-									<option th:each="c : ${categoriesName}" th:value="${c}" th:text="${c}"
-										th:selected="${c==article.getCategory().getName()}"></option>
-								</div>
-								<div th:if="${article.getCategory() == null}">
-									<!-- for save article in controller -->
-									<option th:each="c : ${category}" th:text="${c.name}"></option>
-								</div>
-							</select>
-						</div>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</form>
-				</div>
+					</div>
+					<div class="form-group mb-3">
+						<label class="control-label">Description</label>
+						<input type="text" class="form-control" name="description" th:value="${article.description}">
+						<span th:error="${article.description}" class="text-danger"></span>
+					</div>
+					<div class="form-group mb-3">
+						<label class="control-label">Brand</label>
+						<input type="text" class="form-control" name="brand" th:value="${article.brand}">
+						<span th:errors="${article.brand}" class="text-danger"></span>
+					</div>
+
+					<div class="form-group mb-3">
+						<label class="control-label">Price</label>
+						<input type="text" class="form-control" name="price" th:value="${article.price}">
+						<span th:errors="${article.price}" class="text-danger"></span>
+					</div>
+					<div class="form-group mb-3">
+						<label class="control-label">Category</label>
+						<select name="catName" class="form-control  mb-3">
+							<div th:if="${article.getCategory() != null}">
+								<option th:each="c : ${categoriesName}" th:value="${c}" th:text="${c}"
+									th:selected="${c==article.getCategory().getName()}"></option>
+
+							</div>
+							<div th:if="${article.getCategory() == null}">
+								<!-- for save article in controller -->
+								<option th:each="c : ${category}" th:text="${c.name}"></option>
+							</div>
+
+						</select>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Save</button>
+				</form>
+
 			</div>
 		</div>
 	</div>
+
+
+	<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}">
+	</script>
+	<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
 </body>
 
 </html>

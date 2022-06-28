@@ -24,18 +24,14 @@
 					<form th:action="@{saveUser}" method="post">
 						<div class="form-group">
 							<label class="control-label"></label>
+							<!--ID-->
 							<input type="hidden" class="form-control" name="userId" th:value="${user.userId}">
 							<span th:error="${user.userId}" class="text-danger"></span>
 						</div>
 						<div class="form-group mb-3">
-							<label class="control-label">Email</label>
-							<input type="text" class="form-control" name="email" th:value="${user.email}">
-							<span th:error="${user.email}" class="text-danger"></span>
-						</div>
-						<div class="form-group mb-3">
-							<label class="control-label">Username</label>
-							<input type="text" class="form-control" name="username" th:value="${user.username}">
-							<span th:error="${user.username}" class="text-danger"></span>
+							<label class="control-label">UserName</label>
+							<input type="text" class="form-control" name="userName" th:value="${user.userName}">
+							<span th:error="${user.userName}" class="text-danger"></span>
 						</div>
 
 						<div class="form-group ">

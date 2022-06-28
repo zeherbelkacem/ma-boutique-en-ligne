@@ -26,7 +26,7 @@
 					</div>
 					<div class="col-6">
 						<form class="form-inline input-group">
-							<input class="form-control mr-sm-2" name="date" type="search" placeholder="Search"
+							<input class="form-control mr-sm-2" name="date" type="search" placeholder="Search by customer last name or order date"
 								aria-label="Search">
 							<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 						</form>
@@ -56,7 +56,7 @@
 										class="fas fa-trash-alt"></i></a>
 							</td>
 							<td>
-								<a href="#" class="btn btn-secondary btn-block">Send Invoice</a>
+								<a th:href="@{orders(orderId=${o.id})}" class="btn btn-secondary btn-block">Send Invoice</a>
 							</td>
 						</tr>
 					</tbody>
@@ -95,6 +95,9 @@
 			</div>
 
 		</div>
+
+
+
 
 		<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 		<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>

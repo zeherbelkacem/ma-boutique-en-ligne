@@ -1,90 +1,106 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout">
+	layout:decorate="shop">
 
 <head>
 	<title>SHOP</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" rel="stylesheet"
+		type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
 </head>
 
 <body>
-	<div class="mt-4" layout:fragment="content">
-		<div class="container">
+	<div class="mt-4" layout:fragment="cart">
 
-
-			<div class="row g-2">
-				<div class="col-6">
-					<div class="card">
-						<div class="card-header text-center">
-							<h1>Customer informations</h1>
-						</div>
-
-						<div class="card-body">
-							<table class="table table-light table-striped table-hover">
-								<tbody>
-									<tr><Strong>Customer : </Strong></tr>
-									<tr th:text="${ customer.firstName +' '}"></tr>
-									<tr th:text="${ customer.lastName}"></tr>
-									</br>
-									<tr><Strong>Address : </Strong></tr><br>
-									<tr th:text="${ customer.address}"></tr>
-									</br>
-									<tr><Strong>Phone : </Strong></tr>
-									<tr th:text="${ customer.phone}"></tr>
-									</br>
-									<tr><Strong>Email : </Strong></tr>
-									<tr th:text="${ customer.email}"></tr>
-								</tbody>
-							</table>
-						</div>
+		<div class="row g-2">
+			<div class="col-6">
+				<div class="card text-center">
+					<div class="card-header">
+						<h1>Customer informations</h1>
 					</div>
-				</div>
-				<div class="col-6">
-					<div class="card text-center">
-						<div class="card-header">
-							<h1>My Cart</h1>
-						</div>
 
 
-						<div class="card-body">
-							<table class="table table-dark table-striped table-hover">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>DESCRIPTION</th>
-										<th>QUANTITY</th>
-										<th>UNIT PRICE</th>
-										<th>TOTAL</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="ca:${cartArticles}">
-										<td th:text="${ca.id}"></td>
-										<td th:text="${ca.description}"></td>
-										<td th:text="${ca.quantity}"></td>
-										<td th:text="${ca.price}"></td>
-										<td th:text="${ca.price * ca.quantity }"></td>
-									</tr>
-								</tbody>
-								<tr class="bg-success">
-									<td>Total</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td th:text="${totalPrice}"></td>
-								</tr>
-							</table>
-						</div>
-						<div class="card-footer text-muted">
-							<a onclick="return confirm('Are you sure?')"
-								th:href="@{saveOrder(customerId=${customer.id})}"
-								class="btn btn-secondary btn-block">Order</a>
-						</div>
+					<div class="card-body">
+						<table class="table table-light table-striped table-hover">
+							<tbody>
+								<tr> Customer: </tr>
+								<tr th:text="${ customer.firstName +' '}"></tr>
+								<tr th:text="${ customer.lastName}"></tr>
+								</br>
+								<tr> Address: </tr>
+								<tr th:text="${ customer.address}"></tr>
+								</br>
+								<tr> Address: </tr>
+								<tr th:text="${ customer.phone}"></tr>
+								</br>
+								<tr> Date: </tr>
+								<tr th:text="${ date}"></tr>
+
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
+			<div class="col-6">
+				<div class="card text-center">
+					<div class="card-header">
+						<h1>My Cart</h1>
+					</div>
+
+
+					<div class="card-body">
+						<table class="table table-dark table-striped table-hover">
+							<thead>
+								<tr>
+									<th>DESCRIPTION</th>
+									<th>QUANTITY</th>
+									<th>PRICE</th>
+									<th>WITHDRAW</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="ca:${cartArticles}">
+									<td th:text="${ca.description}"></td>
+									<td th:text="${ca.quantity}"></td>
+									<td th:text="${ca.price}"></td>
+									<td>
+										<a th:href="@{ cart(idToRm=${ca.id})}"><i
+												class="fas fa-trash-alt"></i></a>
+									</td>
+								</tr>
+							</tbody>
+							<tr class="bg-success">
+								<td>Total</td>
+								<td></td>
+								<td th:text="${totalPrice}"></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<div class="card-footer text-muted">
+						<a th:href="@{saveOrder(customerId=${customer.id})}" onclick="return confirm('Are you sure?')"
+							class="btn btn-secondary btn-block">Order</a>
+							
+<!--							<a th:href="@{chooseCustomer}"-->
+<!--							class="btn btn-secondary btn-block">Order1</a>-->
+					</div>
+				</div>
+
+			</div>
+
 		</div>
+
+
+
+		<script src="https://code.jquery.com/jquery-3.6.0.js"
+			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+		<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
 </body>
 
 </html>

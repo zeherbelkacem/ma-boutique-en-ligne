@@ -1,64 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout">
+	layout:decorate="shop">
 
 <head>
 	<title>SHOP</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" rel="stylesheet"
+		type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
 </head>
 
 <body>
-	<div class="mt-4" layout:fragment="content">
-		<div class="container">
+	<div class="mt-4" layout:fragment="cart">
 
+		<div class="card text-center">
+			<div class="card-header">
+				<h1>My Cart</h1>
+			</div>
 
-			<div class="card text-center">
-				<div class="card-header">
-					<h1>My Cart</h1>
-				</div>
-
-				<div class="card-body">
-					<table class="table table-dark table-striped table-hover">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>DESCRIPTION</th>
-								<th>QUANTITY</th>
-								<th>UNIT PRICE</th>
-								<th>TOTAL</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="ca:${cartArticles}">
-								<td th:text="${ca.id}"></td>
-								<td th:text="${ca.description}"></td>
-								<td th:text="${ca.quantity}"></td>
-								<td th:text="${ca.price}"></td>
-								<td th:text="${ca.price * ca.quantity }"></td>
-								<td>
-									<a class="btn btn-danger btn-sm" th:href="@{cart(idToRm=${ca.id})}">Remove</a>
-								</td>
-							</tr>
-						</tbody>
-						<tr class="bg-success">
-							<td>Total</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td th:text="${totalPrice}"></td>
-							<td></td>
+			<div class="card-body">
+				<table class="table table-dark table-striped table-hover">
+					<thead>
+						<tr>
+							<th>DESCRIPTION</th>
+							<th>QUANTITY</th>
+							<th>PRICE</th>
+							<th>WITHDRAW</th>
 						</tr>
-					</table>
-				</div>
-				<div class="card-footer text-muted">
-					<a th:href="@{/chooseCustomer}" class="btn btn-secondary btn-block">Validate cart !!</a>
-					<a th:href="@{/}" class="btn btn-secondary btn-block">Continue shoping !!</a>
-				</div>
+					</thead>
+					<tbody>
+						<tr th:each="ca:${cartArticles}">
+							<td th:text="${ca.description}"></td>
+							<td th:text="${ca.quantity}"></td>
+							<td th:text="${ca.price}"></td>
+							<td>
+								<a th:href="@{ /shop/cart(idToRm=${ca.id})}"><i class="fas fa-trash-alt"></i></a>
+							</td>
+						</tr>
+					</tbody>
+					<tr class="bg-success">
+						<td>Total</td>
+						<td></td>
+						<td th:text="${totalPrice}"></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div class="card-footer text-muted">
+				<a th:href="@{chooseCustomer}" class="btn btn-secondary btn-block">Validate cart !!</a>
+				<a th:href="@{/}" class="btn btn-secondary btn-block">Continue shoping !!</a>
 			</div>
 		</div>
+
 	</div>
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
 </body>
 
 </html>

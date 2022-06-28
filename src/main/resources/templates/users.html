@@ -49,11 +49,15 @@
 						<tr th:each="u:${listUsers}">
 							<td th:text="${u.userId}">
 								</th>
-							<td th:text="${u.username}"></td>
-							<td th:text="${u.enable}"></td>
+							<td th:text="${u.userName}"></td>
+							<td th:text="${u.active}"></td>
 							<td> <select name="role" class="form-control">
-									<option th:each="r : ${u.roles}" th:text="${r.name}"></option>
+									<option th:each="r : ${u.roles}" th:text="${r.role}"></option>
 								</select></td>
+
+
+
+
 							<td>
 								<a href="#" class="btn btn-success btn-block">Get customers & orders</a>
 							</td>

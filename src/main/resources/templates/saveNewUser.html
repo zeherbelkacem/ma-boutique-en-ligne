@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="shop">
+
+<head>
+	<title>SHOP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css} " />
+</head>
+
+</head>
+
+<body>
+
+	<div layout:fragment="section">
+		<div class="container d-flex justify-content-center ">
+			<div class="card text-center col-6 justify-content-center">
+				<div class="card-header">
+					<h5 class="card-title">Add new User</h5>
+				</div>
+				<div class="card-body">
+
+					<form th:action="@{saveUser}" method="post">
+
+						<div class="form-group mb-3">
+							<label class="control-label">UserName</label>
+							<input type="text" class="form-control" name="userName" th:value="${user.userName}">
+							<span th:error="${user.userName}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group mb-3">
+							<label class="control-label">Password</label>
+							<input type="text" class="form-control" name="password" th:value="${user.password}">
+							<span th:errors="${user.password}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group mb-3 bg-warning">
+							<label class="control-label">Roles</label>
+							<br>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" name="userRole" value="USER" checked>
+								<label class="form-check-label" for="inlineCheckbox1">USER</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="checkbox" name="adminRole" value="ADMIN">
+								<label class="form-check-label" for="inlineCheckbox2">ADMIN</label>
+							</div>
+						</div>
+
+
+
+						<div class="form-group mb-3">
+							<label class="control-label bg-warning">Active status</label>
+							<select name="active" class="form-control mb-3">
+								<option th:value="'true'" th:text="true"></option>
+								<option th:value="'false'" th:text="false"></option>
+							</select>
+
+						</div>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}">
+	</script>
+	<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/5.0.1/js/bootstrap.min.js}"></script>
+</body>
+
+</html>

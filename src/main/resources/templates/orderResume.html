@@ -28,19 +28,18 @@
 					<div class="card-body">
 						<table class="table table-light table-striped table-hover">
 							<tbody>
-								<tr> Customer: </tr>
+								<tr><Strong>Customer : </Strong></tr>
 								<tr th:text="${ customer.firstName +' '}"></tr>
 								<tr th:text="${ customer.lastName}"></tr>
 								</br>
-								<tr> Address: </tr>
+								<tr><Strong>Address : </Strong></tr><br>
 								<tr th:text="${ customer.address}"></tr>
 								</br>
-								<tr> Address: </tr>
+								<tr><Strong>Phone : </Strong></tr>
 								<tr th:text="${ customer.phone}"></tr>
 								</br>
-								<tr> Date: </tr>
-								<tr th:text="${ date}"></tr>
-
+								<tr><Strong>Email : </Strong></tr>
+								<tr th:text="${ customer.email}"></tr>
 							</tbody>
 						</table>
 					</div>
@@ -69,8 +68,7 @@
 									<td th:text="${ca.quantity}"></td>
 									<td th:text="${ca.price}"></td>
 									<td>
-										<a th:href="@{ cart(idToRm=${ca.id})}"><i
-												class="fas fa-trash-alt"></i></a>
+										<a th:href="@{ cart(idToRm=${ca.id})}"><i class="fas fa-trash-alt"></i></a>
 									</td>
 								</tr>
 							</tbody>
@@ -83,20 +81,12 @@
 						</table>
 					</div>
 					<div class="card-footer text-muted">
-						<a th:href="@{saveOrder(customerId=${customer.id})}" onclick="return confirm('Are you sure?')"
+						<a th:href="@{validateOrder(customerId=${customer.id})}" onclick="return confirm('Are you sure?')"
 							class="btn btn-secondary btn-block">Order</a>
-							
-<!--							<a th:href="@{chooseCustomer}"-->
-<!--							class="btn btn-secondary btn-block">Order1</a>-->
 					</div>
 				</div>
-
 			</div>
-
 		</div>
-
-
-
 		<script src="https://code.jquery.com/jquery-3.6.0.js"
 			integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 		<script th:src="@{/webjars/popper.js/2.9.2/umd/popper.min.js}"></script>

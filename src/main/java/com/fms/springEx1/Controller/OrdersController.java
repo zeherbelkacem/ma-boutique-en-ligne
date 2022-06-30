@@ -40,11 +40,13 @@ public class OrdersController {
 	@RequestMapping("admin/orders")
 	public String adminOrders(Model model, @RequestParam(name = "orderId", defaultValue = "") Long orderId,
 			@RequestParam(name = "page", defaultValue = "0") int page,
+			@RequestParam(name = "phone", defaultValue = "") String phone,
 			@RequestParam(name = "size", defaultValue = "4") int size
 	) {
 		if (orderId != null)
 			orderService.loadInvoice(orderId);
-		Page<Order> ordersPages = orderService.ordersPageByPage(PageRequest.of(page, size));
+		Page<Order> ordersPages = orderService.ordersPageByPageAndPhone(phone, PageRequest.of(page, size));
+//		Page<Order> ordersPages = orderService.ordersPageByPage(PageRequest.of(page, size));
 		model.addAttribute("currentPage", page);
 		model.addAttribute("size", size);
 		model.addAttribute("pages", new int[ordersPages.getTotalPages()]);

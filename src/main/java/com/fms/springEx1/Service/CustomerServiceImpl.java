@@ -31,4 +31,9 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerRepository.findByFirstName(firstName);
 	}
 
+	@Override
+	public Customer readByPhone(String phone) {
+		return customerRepository.findByPhone(phone);
+	}
+
 }

@@ -16,43 +16,27 @@ import com.fms.springEx1.Service.ICategoryService;
 @Controller
 public class AdminController {
 
-	/*
-	 * 
-	 */
 	@Autowired
 	private IArticleService articleService;
 	@Autowired
 	private ICategoryService categoryService;
 
+
 	/**
-	 * 
+	 * Return list of articles in administration part
 	 * @param model
+	 * @param page
+	 * @param size
+	 * @param keyWord
+	 * @param id
 	 * @return
 	 */
-//	@RequestMapping("admin")
-//	public String admin(Model model) {
-//		List<Article> articles = articleService.realAll();
-//		model.addAttribute("listArticle", articles);
-//		model.addAttribute("listOf", "List of articles");
-//		return "admin";
-//	}
 	@RequestMapping("/admin")
 	public String articleList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size,
 			@RequestParam(name = "keyWord", defaultValue = "") String keyWord,
 			@RequestParam(name = "id", defaultValue = "") Long id) {
 
-		/*
-		 * Pagination without key word
-		 */
-//		Page<Article> articles = articleService.readArticlesPageByPage(page, size);
-		/*
-		 * Pagination using key word
-		 */
-
-		/*
-		 * 
-		 */
 		if (id != null)
 			articleService.deleteArticleById(id);
 
@@ -69,8 +53,12 @@ public class AdminController {
 	}
 
 	/**
-	 * 
+	 * Return list of categories
 	 * @param model
+	 * @param catId
+	 * @param page
+	 * @param size
+	 * @param catName
 	 * @return
 	 */
 	@RequestMapping("admin/categories")

@@ -68,7 +68,7 @@ public class CartController {
 		customer.setAddress(address + " /" + address2 + ", " + zip + " " + city + ", " + state);
 		customer.setUuser(user);
 		customerService.saveCustomer(customer);
-		attributes.addAttribute("customerId", customerService.readByFirstName(customer.getFirstName()).getId());
+		attributes.addAttribute("customerId", customerService.readByPhone(customer.getPhone()).getId());
 		return "redirect:orderResume";
 	}
 

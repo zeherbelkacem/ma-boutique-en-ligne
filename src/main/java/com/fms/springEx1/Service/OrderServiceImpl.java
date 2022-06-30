@@ -143,4 +143,9 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 
+	@Override
+	public Page<Order> ordersPageByPageAndPhone(String phone, Pageable pageable) {
+		return orderRepository.findByCustomerPhoneContains(phone, pageable);
+	}
+
 }

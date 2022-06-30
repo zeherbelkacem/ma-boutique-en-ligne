@@ -1,6 +1,7 @@
 package com.fms.springEx1.Service;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.fms.springEx1.Entities.Order;
@@ -16,4 +17,6 @@ public interface OrderService {
 	public Page<Order> ordersPageByPage(Pageable pageable);
 	
 	public void loadInvoice(long orderId);
+
+	public Page<Order> ordersPageByPageAndPhone(String phone, Pageable pageable);
 }

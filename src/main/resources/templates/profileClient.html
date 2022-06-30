@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="shop">
+
+<head>
+	<title>SHOP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css" rel="stylesheet"
+		type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+	<div class="mt-4" layout:fragment="cart">
+		<div class="row g-2 mt-5 mb-5 justify-content-center">
+
+			<div class="col-3">
+				<a th:href="@{profileClient }" class="w-100 btn btn-secondary btn-block">Your customers</a>
+			</div>
+
+			<div class="col-3">
+				<a th:href="@{listOrders}" class="w-100 btn btn-secondary btn-block">Your orders</a>
+			</div>
+
+			<div class="col-3">
+				<a th:href="@{userProfile}" class="w-100 btn btn-secondary btn-block">See my profil</a>
+			</div>
+		</div>
+
+		<section layout:fragment="orders">
+
+			<div class="card text-center">
+				<div class="card-header">
+					<h1>Your different customers addresses</h1>
+				</div>
+
+				<div class="card-body">
+					<table class="table table-dark table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Fisrt Name</th>
+								<th>Last Name</th>
+								<th>Address</th>
+								<th>phone</th>
+								<th>Delete</th>
+								<th>Update</th>
+								<th>Choose this person</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cu:${userCustomersList}">
+								<td th:text="${cu.firstName}"></td>
+								<td th:text="${cu.lastName}"></td>
+								<td th:text="${cu.address}"></td>
+								<td th:text="${cu.phone}"></td>
+								<td>
+									<a th:href="@{ chooseCustomer(id=${cu.id})}"><i class="fas fa-trash-alt"></i></a>
+								</td>
+								<td>
+									<a href=""><i class="fas fa-edit"></i></a>
+								</td>
+								<td>
+									<a th:href="@{orderResume(customerId=${cu.id})}"
+										class="btn btn-success btn-block">select this address</a>
+								</td>
+							</tr>
+						</tbody>
+
+					</table>
+				</div>
+				<div class="card-footer text-muted">
+					<a th:href="@{chooseCustomer(add=${'add'})}" class="btn btn-secondary btn-block">Add new person</a>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+
+</body>
+
+</html>

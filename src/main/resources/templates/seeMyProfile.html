@@ -22,25 +22,25 @@ layout:decorate="profileClient">
 			<div class="container">
 				<div class="card text-center">
 					<div class="card-header">
-						<h1>Your list of orders</h1>
+						<h1>My profile</h1>
 					</div>
 
 					<div class="card-body">
 						<table class="table table-dark table-striped table-hover">
 							<thead>
 								<tr>
-									<th>ID</th>
-									<th>DATE</th>
-									<th>TOTAL PRICE</th>
-									<th>CUSTOMER</th>
+									<th>Identifiant</th>
+									<th>Name</th>
+									<th>Edit</th>
+
+
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="o:${orders}">
-									<td th:text="${o.id}"></td>
-									<td th:text="${o.date}"></td>
-									<td th:text="${o.totalPrice}"></td>
-									<td th:text="${o.customer.firstName} + ' ' + ${o.customer.lastName}"></td>
+								<tr>
+							<td th:text="${uuser.userId}"></td>
+							<td th:text="${uuser.userName}"></td> 
+
 								</tr>
 							</tbody>
 						</table>

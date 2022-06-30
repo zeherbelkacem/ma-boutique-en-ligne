@@ -20,19 +20,18 @@ public class UserServiceImpl implements UserService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	
 	@Override
-	public Uuser saveUuser(Uuser user) {
-		
-		//Creation
-		if(userRepository.findById(user.getUserId()) == null) {
-			String pwdEncoder = passwordEncoder.encode(user.getPassword());
-			user.setPassword(pwdEncoder);
-			return userRepository.save(user);
-		}
-		
-		//Updating
-		return userRepository.save(user);
-	}
+    public Uuser saveUuser(Uuser user) {
+        //Creation
+        if(userRepository.findById(user.getUserId()).isEmpty()) {
+            String pwdEncoder = passwordEncoder.encode(user.getPassword());
+            user.setPassword(pwdEncoder);
+            return userRepository.save(user);
+        }
+        //Updating
+        return userRepository.save(user);
+    }
 
 	@Override
 	public List<Uuser> readAll() {

@@ -1,7 +1,6 @@
 package com.fms.springEx1.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fms.springEx1.Entities.Category;
-import com.fms.springEx1.Entities.CategoryEnum;
 import com.fms.springEx1.Repository.CategoryRepository;
 
 @Service

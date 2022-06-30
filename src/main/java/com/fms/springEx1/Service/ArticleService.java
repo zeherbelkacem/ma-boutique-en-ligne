@@ -3,8 +3,8 @@ package com.fms.springEx1.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.fms.springEx1.Entities.Article;
-import com.fms.springEx1.Entities.CategoryEnum;
 import com.fms.springEx1.Repository.ArticleRepository;
 
 @Service

@@ -20,7 +20,7 @@ public class CategoryController {
 	private ICategoryService categoryService;
 	
 	/**
-	 * 
+	 * Méthode qui renvoit un formulaire pour enregistrer une nouvelle catégorie
 	 * @return
 	 */
 	@GetMapping("admin/categories/saveCategoryForm")
@@ -30,7 +30,7 @@ public class CategoryController {
 	}
 	
 	/**
-	 * 
+	 * Méthode qui renvoit un formulaire pour mettre à jour une catégorie
 	 * @param model
 	 * @param id
 	 * @return

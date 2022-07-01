@@ -26,6 +26,12 @@ public class ProfileController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	/**
+	 * Méthode qui renvoit sur le profil général de l'utilisateur
+	 * @param model
+	 * @param principal
+	 * @return
+	 */
 	@GetMapping ("profileClient")
 	public String profile (Model model, Principal principal) {
 		Uuser user = userService.findUuserByUserName(principal.getName());
@@ -33,6 +39,12 @@ public class ProfileController {
 		return "profileClient";
 	}
 
+	/**
+	 * Méthode qui renvoit sur le profil de l'utilisateur avec son identifiant et nom
+	 * @param model
+	 * @param principal
+	 * @return
+	 */
 	@GetMapping ("userProfile")
 	public String customerProfile (Model model, Principal principal) {
 		Uuser user = userService.findUuserByUserName(principal.getName());
@@ -41,12 +53,31 @@ public class ProfileController {
 
 	}
 	
+	
+	/**
+	 * Méthode qui renvoit le formulaire de changement de mot de passe
+	 * @param model
+	 * @param uuserId
+	 * @return
+	 */
 	@GetMapping("changePasswordForm")
     public String updateProfile(Model model, @RequestParam(name = "uuserId", defaultValue = "") Long uuserId) {
         model.addAttribute("uuser", userService.readById(uuserId));
 //      model.addAttribute("uuser", new Uuser());
         return "passwordUpdate";
     }
+	
+	
+	/**
+	 * Méthode qui permet à l'utilisateur de changer de mot de passe
+	 * @param model
+	 * @param uuser
+	 * @param bindingResult
+	 * @param principal
+	 * @param newPassword
+	 * @param currentPassword
+	 * @return
+	 */
     @PostMapping("changePassword")
     public String changePassword(Model model, @Valid Uuser uuser, BindingResult bindingResult, Principal principal,
             @RequestParam("newPassword") String newPassword, @RequestParam("currentPassword") String currentPassword) {

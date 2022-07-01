@@ -40,9 +40,9 @@
 							<tr>
 								<td th:text="${uuser.userId}"></td>
 								<td th:text="${uuser.userName}"></td>
-								<td> <a th:href="@{changePasswordForm(uuserId=${uuser.userId})}"><i
-											class="fas fa-edit"></i></a>
-								<td>
+								<td><a th:href="@{changePasswordForm(uuserId=${uuser.userId})}"
+										class="btn btn-secondary btn-block">Change Password</a>
+								</td>
 
 							</tr>
 						</tbody>

@@ -34,6 +34,14 @@ public class CartController {
 		this.userService = userService;
 	}
 
+	/**
+	 * Méthode qui retourne un formulaire pour ajouter un nouveau client et une liste des différents clients
+	 * @param model
+	 * @param principal
+	 * @param add
+	 * @param addcustomerId
+	 * @return
+	 */
 	@GetMapping("chooseCustomer")
 	public String chooseCustomer(Model model, Principal principal,
 			@RequestParam(name = "add", defaultValue = "") String add,
@@ -56,6 +64,21 @@ public class CartController {
 		return "saveNewCustomer";
 	}
 
+	
+	/**
+	 * Méthode qui permet de sauvegarder un nouveau client pour la commande et redirige vers un résumé de la commande
+	 * @param customer
+	 * @param bindingResult
+	 * @param principal
+	 * @param model
+	 * @param attributes
+	 * @param address
+	 * @param address2
+	 * @param zip
+	 * @param city
+	 * @param state
+	 * @return
+	 */
 	@PostMapping("saveCustomer")
 	public String saveCustomer(@Valid Customer customer, BindingResult bindingResult, Principal principal, Model model,
 			RedirectAttributes attributes, @RequestParam(name = "address", defaultValue = "") String address,
@@ -71,7 +94,14 @@ public class CartController {
 		attributes.addAttribute("customerId", customerService.readByPhone(customer.getPhone()).getId());
 		return "redirect:orderResume";
 	}
-
+	
+/**
+ * Méthode qui renvoit le résumé de la commande
+ * @param model
+ * @param principal
+ * @param customerId
+ * @return
+ */
 	@GetMapping("orderResume")
 	public String orderResume(Model model, Principal principal,
 			@RequestParam(name = "customerId", defaultValue = "") Long customerId) {

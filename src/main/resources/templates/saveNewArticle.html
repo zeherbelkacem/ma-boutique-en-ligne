@@ -24,13 +24,13 @@
 						<div class="form-group">
 							<label class="control-label"></label> <!--ID-->
 							<input type="hidden" class="form-control" name="id" th:value="${article.id}">
-							<span th:error="${article.id}" class="text-danger"></span>
+							<span th:errors="${article.id}" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="form-group mb-3">
 						<label class="control-label">Description</label>
 						<input type="text" class="form-control" name="description" th:value="${article.description}">
-						<span th:error="${article.description}" class="text-danger"></span>
+						<span th:errors="${article.description}" class="text-danger"></span>
 					</div>
 					<div class="form-group mb-3">
 						<label class="control-label">Brand</label>

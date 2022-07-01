@@ -40,13 +40,15 @@ public class Article implements Serializable {
 
 	@Column(name = "DESCRIPTION")
 	@NotNull(message = "Can't be null!")
-	//@Size(min = 10, max = 50)
+	@Size(min = 10, max = 50)
 	private String description;
 
 	@Column(name = "BRAND")
+	@NotNull
 	private String brand;
 
 	@Column(name = "PRICE")
+	@NotNull
 	@DecimalMin("10")
 	private Double price;
 

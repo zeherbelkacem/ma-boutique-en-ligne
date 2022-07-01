@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fms.springEx1.Entities.Article;
 import com.fms.springEx1.Entities.Category;
@@ -30,6 +31,20 @@ public class ArticleController {
 	@Autowired
 	private ICategoryService categoryService;
 
+	/**
+	 * Cette méthode renvoie la liste d'articles classés par pages, avec possibilité
+	 * de recherche par mots-clés
+	 * 
+	 * @param model
+	 * @param page
+	 * @param size
+	 * @param keyWord
+	 * @param catName
+	 * @param idToCart
+	 * @param idToRm
+	 * @param quantity
+	 * @return
+	 */
 	@RequestMapping("/")
 	public String articleList(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size,
@@ -38,7 +53,7 @@ public class ArticleController {
 			@RequestParam(name = "idToCart", defaultValue = "") Long idToCart,
 			@RequestParam(name = "idToRm", defaultValue = "") Long idToRm,
 			@RequestParam(name = "quantity", defaultValue = "1") int quantity) {
-			System.out.println("controller"+quantity);
+		System.out.println("controller" + quantity);
 		if (idToCart != null)
 			articleService.addArticleToCart(idToCart);
 		if (idToRm != null)
@@ -75,6 +90,7 @@ public class ArticleController {
 	}
 
 	/**
+	 * Cette méthode retourne le formulaire d'ajout d'un nouvel article
 	 * 
 	 * @return
 	 */
@@ -86,6 +102,7 @@ public class ArticleController {
 	}
 
 	/**
+	 * Cette méthode permet de compléter le formulaire d'ajout d'un nouvel article
 	 * 
 	 * @param article
 	 * @param bindingResult
@@ -94,15 +111,28 @@ public class ArticleController {
 	 */
 	@PostMapping("admin/saveArticle")
 	public String saveArticle(@Valid Article article, BindingResult bindingResult,
-			@RequestParam("catName") String catName) {
+			@RequestParam("catName") String catName, RedirectAttributes attributes) {
 		if (bindingResult.hasErrors()) {
-			return "redirect:/admin/saveArticleForm";
+			if (article.getId() != null) {
+				attributes.addAttribute("id", article.getId());
+				return "redirect:/admin/updateArticleForm";
+			} else
+				return "redirect:/admin/saveArticleForm";
 		}
+		article.setQuantity(1);
 		article.setCategory(categoryService.getCategoryByName(catName));
 		articleService.saveArticle(article);
 		return "redirect:/admin";
 	}
 
+	/**
+	 * Cette méthode renvoit un formulaire de mise à jour d'un article à partir de
+	 * son identifiant
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("admin/updateArticleForm")
 	public String updateArticleForm(@RequestParam(name = "id", defaultValue = "") Long id, Model model) {
 		List<String> CategoryNames = new ArrayList<String>();
@@ -117,6 +147,7 @@ public class ArticleController {
 	}
 
 	/**
+	 * Cette méthode renvoit les articles classés par catégorie
 	 * 
 	 * @param name
 	 * @param modelMap
@@ -155,6 +186,13 @@ public class ArticleController {
 		return "articlesByCategory";
 	}
 
+	/**
+	 * Cette méthode renvoit le panier d'articles, avec le total
+	 * 
+	 * @param model
+	 * @param idToRm
+	 * @return
+	 */
 	@RequestMapping("cart")
 	public String articleList(Model model, @RequestParam(name = "idToRm", defaultValue = "") Long idToRm) {
 

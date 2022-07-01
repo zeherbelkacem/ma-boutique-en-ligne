@@ -28,15 +28,31 @@ public class OrdersController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("saveOrder")
-	public String saveOrder(@RequestParam(name = "customerId", defaultValue = "") Long customerId,
-			RedirectAttributes model) {
-		model.addAttribute("customerId", customerId);
-		orderService.saveOrder(customerId);
+	
+	/**
 
-		return "redirect:/orderResume";
-	}
+	 * @param customerId
+	 * @param model
+	 * @return
+	 */
+//	@RequestMapping("saveOrder")
+//	public String saveOrder(@RequestParam(name = "customerId", defaultValue = "") Long customerId,
+//			RedirectAttributes model) {
+//		model.addAttribute("customerId", customerId);
+//		orderService.saveOrder(customerId);
+//
+//		return "redirect:/orderResume";
+//	}
 
+	/**
+	 * Méthode qui renvoit la liste des commandes pour l'administrateur, classés par page, et charge une facture
+	 * @param model
+	 * @param orderId
+	 * @param page
+	 * @param phone
+	 * @param size
+	 * @return
+	 */
 	@RequestMapping("admin/orders")
 	public String adminOrders(Model model, @RequestParam(name = "orderId", defaultValue = "") Long orderId,
 			@RequestParam(name = "page", defaultValue = "0") int page,
@@ -56,6 +72,13 @@ public class OrdersController {
 		return "orders";
 	}
 
+	
+	/**
+	 * Méthode qui permet de passer une commande
+	 * @param customerId
+	 * @param model
+	 * @return liste de commandes
+	 */
 	@GetMapping("validateOrder")
 	public String validateOrder(@RequestParam(name = "customerId", defaultValue = "") Long customerId,
 			RedirectAttributes model) {
@@ -64,6 +87,14 @@ public class OrdersController {
 		return "redirect:/listOrders";
 	}
 	
+	
+	/**
+	 * Méthode qui renvoit la liste des commandes pour un utilisateur
+	 * @param model
+	 * @param principal
+	 * @param customerId
+	 * @return
+	 */
 	@GetMapping("listOrders")
 	public String listOrders(Model model, Principal principal,
 			@RequestParam(name = "customerId", defaultValue = "") Long customerId) {

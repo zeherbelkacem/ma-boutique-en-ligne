@@ -80,7 +80,7 @@ public class AdminController {
 		return "category";
 	}
 
-	/**
+	/**Return articles by categories
 	 * 
 	 * @param name
 	 * @param modelMap

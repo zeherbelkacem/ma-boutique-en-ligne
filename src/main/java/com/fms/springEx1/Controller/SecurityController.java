@@ -54,6 +54,12 @@ public class SecurityController {
 //		return "redirect:/shop/orderResume";
 //	}
 
+	/**
+	 * Méthode pour se délogger
+	 * @param request
+	 * @return
+	 * @throws ServletException
+	 */
 	@RequestMapping("/logout")
 	public String logoutForm(HttpServletRequest request) throws ServletException {
 		request.logout();
@@ -74,6 +80,15 @@ public class SecurityController {
 //		return "redirect:/shop/orderResume";
 //	}
 
+	/**
+	 * Méthode qui renvoit la liste des utilisateurs à l'administrateur
+	 * @param model
+	 * @param page
+	 * @param size
+	 * @param usename
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping("admin/users")
 	public String users(Model model, @RequestParam(name = "page", defaultValue = "0") int page,
 			@RequestParam(name = "size", defaultValue = "5") int size,
@@ -94,6 +109,13 @@ public class SecurityController {
 		return "users";
 	}
 
+	
+	/**
+	 * Méthode qui permet de mettre à jour le rôle d'un utilisateur
+	 * @param model
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping("admin/users/updateUserForm")
 	public String updateUser(Model model, @RequestParam(name = "userId") Long userId) {
 		model.addAttribute("user", userService.readById(userId));
@@ -102,7 +124,7 @@ public class SecurityController {
 	}
 	
 	/**
-	 * 
+	 * Méthode qui renvoit le formulaire d'ajout d'un utilisateur pour l'administrateur
 	 * @param model
 	 * @return
 	 */
@@ -113,6 +135,16 @@ public class SecurityController {
 		return "saveNewUser";
 	}
 
+	/**
+	 * Méthode qui permet d'ajouter un utilisateur avec un rôle
+	 * @param uuser
+	 * @param bindingResult
+	 * @param userRole
+	 * @param adminRole
+	 * @param active
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("admin/users/saveUser")
 	public String saveUser(@Valid Uuser uuser, BindingResult bindingResult, @RequestParam(name = "userRole", defaultValue = "") String userRole,
 			@RequestParam(name = "adminRole", defaultValue = "") String adminRole, @RequestParam("active") String active, Model model) {
